@@ -49,6 +49,7 @@
     "sequelize-cli": "^5.5.1",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^2.3.5",
+    "ts-loader": "^7.0.4",
     "typescript": "^3.9.2",
     "uuid": "^3.4.0",
     "webpack": "^4.42.1",

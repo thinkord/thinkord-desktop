@@ -325,7 +325,6 @@ ipcMain.on('delete-file', async (event, args) => {
         json["collections"].map((item, index) => {
             // Search the object that is equal to the original one.
             if (item["path"] === args.collectionPath) {
-                oldCollectionName = json["collections"][index].name;
                 json["collections"].splice(index, 1);  // Delete collection from array.
             }
         });
