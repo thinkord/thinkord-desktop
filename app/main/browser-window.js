@@ -65,7 +65,6 @@ exports.createTextWindow = (textWin, controlbarWin) => {
         resizable: true,
         webPreferences: {
             nodeIntegration: true,
-            webSecurity: false
         },
         show: false
     })
@@ -101,7 +100,6 @@ exports.createHomeWindow = (homeWin) => {
         show: false,
         webPreferences: {
             nodeIntegration: true,
-            webSecurity: false
         }
     });
 

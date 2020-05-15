@@ -18,7 +18,7 @@ module.exports = merge.smart(baseConfig, {
         before() {
             spawn(
                 'electron',
-                ['app/main-dev.js'],
+                ['app/main-dev.ts'],
                 { shell: true, env: process.env, stdio: 'inherit' }
             )
                 .on('close', code => process.exit(0))

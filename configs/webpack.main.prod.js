@@ -13,7 +13,14 @@ module.exports = merge.smart(baseConfig, {
   devtool: process.env.DEBUG_PROD === 'true' ? 'source-map' : 'none',
   mode: 'production',
   target: 'electron-main',
-  entry: './app/main-dev.js',
+  entry: './app/main-dev.ts',
+  module: {
+    rules: [{
+      test: /\.ts$/,
+      include: /app/,
+      use: [{ loader: 'ts-loader' }]
+    }]
+  },
   output: {
     path: path.join(__dirname, '..'),
     filename: './build/main-prod.js'

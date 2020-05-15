@@ -16,7 +16,7 @@
     "start": "cross-env NODE_ENV=production electron ./build/main-prod.js",
     "pack": "npm run build && electron-builder --config electron-builder.json --dir",
     "dist": "npm run build && electron-builder --config electron-builder.json",
-    "postinstall": "electron-builder install-app-deps" 
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
     "Electron",
@@ -49,6 +49,8 @@
     "sequelize-cli": "^5.5.1",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^2.3.5",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.2",
     "uuid": "^3.4.0",
     "webpack": "^4.42.1",
     "webpack-bundle-analyzer": "^3.6.1",
@@ -64,7 +66,7 @@
     "concurrently": "^5.1.0",
     "dotenv": "^8.2.0",
     "html-react-parser": "^0.9.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "microsoft-cognitiveservices-speech-sdk": "^1.10.1",
     "minimist": "^1.2.5",
     "mousetrap": "^1.6.5",
