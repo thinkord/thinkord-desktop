@@ -1,0 +1,27 @@
+.inputField{
+  width:50%;
+  height: 24px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #35c18927;
+  color: #35c189;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.inputField:focus{
+  outline: 0;
+}
+
+.titleInput{
+  font-size: 22px;
+}
+
+.blockTitle{
+  grid-area: title;
+  align-self: center;
+  padding-left: 40px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #2b7a4f;
+}
