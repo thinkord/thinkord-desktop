@@ -7,20 +7,11 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const baseConfig = require('./webpack.base.js');
+const baseConfig = require('./webpack.main.js');
 
 module.exports = merge.smart(baseConfig, {
   devtool: process.env.DEBUG_PROD === 'true' ? 'source-map' : 'none',
   mode: 'production',
-  target: 'electron-main',
-  entry: './app/main-dev.ts',
-  module: {
-    rules: [{
-      test: /\.ts$/,
-      include: /app/,
-      use: [{ loader: 'ts-loader' }]
-    }]
-  },
   output: {
     path: path.join(__dirname, '..'),
     filename: './build/main-prod.js'
@@ -29,12 +20,12 @@ module.exports = merge.smart(baseConfig, {
     minimizer: process.env.E2E_BUILD
       ? []
       : [
-          new TerserPlugin({
-            parallel: true,
-            sourceMap: true,
-            cache: true
-          })
-        ]
+        new TerserPlugin({
+          parallel: true,
+          sourceMap: true,
+          cache: true
+        })
+      ]
   },
 
   plugins: [
@@ -60,14 +51,4 @@ module.exports = merge.smart(baseConfig, {
       E2E_BUILD: false
     })
   ],
-
-  /**
-   * Disables webpack processing of __dirname and __filename.
-   * If you run the bundle in node.js it falls back to these values of node.js.
-   * https://github.com/webpack/webpack/issues/2010
-   */
-  node: {
-    __dirname: false,
-    __filename: false
-  }
 });
