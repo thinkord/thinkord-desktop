@@ -5,7 +5,7 @@
   "private": true,
   "main": "build/main-prod.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.renderer.dev.js",
+    "dev": "npm run dev-main && npm run dev-renderer",
     "db:dev:migrate": "cd app && cross-env NODE_ENV=development sequelize db:migrate",
     "start:dev": "concurrently \"npm run dev\" \"npm run db:dev:migrate\"",
     "db:prd:migrate": "cd app && cross-env NODE_ENV=production sequelize db:migrate",
@@ -14,6 +14,8 @@
     "build-main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.main.prod.js",
     "build-renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.renderer.prod.js",
     "start": "cross-env NODE_ENV=production electron ./build/main-prod.js",
+    "dev-main": "cross-env NODE_ENV=development webpack --config configs/webpack.main.dev.js",
+    "dev-renderer": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.renderer.dev.js",
     "pack": "npm run build && electron-builder --config electron-builder.json --dir",
     "dist": "npm run build && electron-builder --config electron-builder.json",
     "postinstall": "electron-builder install-app-deps"
@@ -30,6 +32,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
+    "@babel/register": "^7.9.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
