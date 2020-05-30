@@ -165,7 +165,7 @@ export default class ControlBar extends Component {
 
     render() {
         return (
-            <div className="bar_container">
+            <div className="bar-container">
                 {this.state.controlbar_button.map(button =>
                     <ControlBarButton
                         key={button.id}

@@ -60,7 +60,7 @@ export default class BlockTitle extends Component {
                     <input
                         type="text"
                         name="title"
-                        className="inputField titleInput"
+                        className="input-field title-input"
                         autoComplete="off"
                         value={this.state.title}
                         onChange={this.handleChange}
@@ -69,7 +69,7 @@ export default class BlockTitle extends Component {
                 </form>
         }
         return (
-            <div className="blockTitle" onBlur={this.handleBlur}>
+            <div className="block-title" onBlur={this.handleBlur}>
                 {title}
             </div>
         )
