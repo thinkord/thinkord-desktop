@@ -1,10 +1,12 @@
-// Nodejs module
+import { app, ipcMain, globalShortcut, dialog, BrowserWindow } from "electron";
+import { IpcChannelInterface } from "./main/ipc/IpcChannelInterface";
+import { ShortcutChannel } from "./main/ipc/ShortcutChannel";
 const fs = require('fs');
 const path = require('path');
 
 
 // Electron module
-const { app, ipcMain, globalShortcut, dialog } = require('electron');
+// const { app, ipcMain, globalShortcut, dialog } = require('electron');
 // const noteTray = require('./note-tray');
 const browserWindow = require('./main/browser-window');  // All functions related to browser window are defined here
 
@@ -20,26 +22,31 @@ let mediaDir;  // Path to media directory, which stores media files
 // // Make Win10 notification available
 // app.setAppUserModelId(process.execPath);
 
+
 let controlbarWin = null;  // Control bar window
 let textWin = null;  // Text window
-let homeWin = null;  // Home window
+// let homeWin = null;  // Home window
 // let tray = null;
 
 require('dotenv').config();
 
 class Main {
-    public init() {
+    homeWin: BrowserWindow
+    public async init(ipcChannels: IpcChannelInterface[]) {
         initUserEnv().then(res => {
             appSettingPath = res.appSettingPath;
             collectionDir = res.collectionDir;
             mediaDir = res.mediaDir;
         });
 
-        app.on('ready', this.createWindow);
+        app.on('ready', async() => { 
+            await this.createWindow()
+            this.registerIpcChannels(ipcChannels)
+         });
         app.on('window-all-closed', this.onWindowAllClosed);
         app.on('activate', this.onActivate);
 
-
+        
 
         // Keep listening on channel 'register-shortcuts'.
         // If it receive message from that channel, it would register global shortcuts,
@@ -49,32 +56,32 @@ class Main {
         //     controlbarWin.webContents.send('Shift+F1');
         // });
         // When pressed Shift+F1, it will send message with channel 'Shift+F1'.
-        ipcMain.on('register-shortcuts', () => {
-            globalShortcut.register('Shift+F1', () => {
-                // Send message to home window with channel 'full-snip'
-                homeWin.webContents.send('full-snip');
-            });
+        // ipcMain.on('register-shortcuts', () => {
+        //     globalShortcut.register('Shift+F1', () => {
+        //         // Send message to home window with channel 'full-snip'
+        //         homeWin.webContents.send('full-snip');
+        //     });
 
-            globalShortcut.register('Shift+F2', () => {
-                // Send message to home window with channel 'open-text-win'
-                homeWin.webContents.send('open-text-win');
-            });
+        //     globalShortcut.register('Shift+F2', () => {
+        //         // Send message to home window with channel 'open-text-win'
+        //         homeWin.webContents.send('open-text-win');
+        //     });
 
-            globalShortcut.register('Shift+F3', () => {
-                // Send message to home window with channel 'drag-snip'
-                homeWin.webContents.send('drag-snip');
-            });
+        //     globalShortcut.register('Shift+F3', () => {
+        //         // Send message to home window with channel 'drag-snip'
+        //         homeWin.webContents.send('drag-snip');
+        //     });
 
-            globalShortcut.register('Shift+F4', () => {
-                // Send message to home window with channel 'record-audio'
-                homeWin.webContents.send('record-audio');
-            });
+        //     globalShortcut.register('Shift+F4', () => {
+        //         // Send message to home window with channel 'record-audio'
+        //         homeWin.webContents.send('record-audio');
+        //     });
 
-            globalShortcut.register('Shift+F5', () => {
-                // Send message to home window with channel 'record-video'
-                homeWin.webContents.send('record-video');
-            });
-        });
+        //     globalShortcut.register('Shift+F5', () => {
+        //         // Send message to home window with channel 'record-video'
+        //         homeWin.webContents.send('record-video');
+        //     });
+        // });
 
         // Keep listening on channel 'unregister-shortcuts'.
         // If it receive message from that channel, it would unregister all global shortcuts, 
@@ -91,13 +98,13 @@ class Main {
         // Keep listening on channel 'savebutton'.
         // If it receive message from that channel, it would send message to home window with channel 'savebutton'.
         ipcMain.on('savebutton', () => {
-            if (homeWin !== null) homeWin.webContents.send('savebutton');
+            if (this.homeWin !== null) this.homeWin.webContents.send('savebutton');
         });
 
         // Keep listening on channel 'hidesavebutton'.
         // If it receive message from that channel, it would send message to home window with channel 'hidesavebutton'.
         ipcMain.on('hidesavebutton', () => {
-            if (homeWin !== null) homeWin.webContents.send('hidesavebutton');
+            if (this.homeWin !== null) this.homeWin.webContents.send('hidesavebutton');
         });
 
         // Keep listening on channel 'save-collection'.
@@ -109,21 +116,7 @@ class Main {
 
         // Keep listening on channel 'download-html'.
         // If it receive message from that channel, it would show a win10 save dialog. 
-        ipcMain.on('download-html', (event) => {
-            // Show win10 native dialog to allow users to choose where to save their files.
-            let result = dialog.showSaveDialog(homeWin, {
-                filters: [{ name: 'webpage(.html)', extensions: ['.html'] }]
-            });
-            if (!result) { return }
-            if (homeWin !== null) {
-                // Save content in current page in home window as HTML files.
-                homeWin.webContents.savePage(result, 'HTMLComplete', (err) => {
-                    if (err) console.log(err);
-                    console.log('Page was saved successfully.');
-                    event.reply('download-html');
-                });
-            }
-        });
+
 
         // Keep listening on channel 'open-text-win'.
         // If it receive message from that channel, it would create a new text window if not existed.
@@ -143,18 +136,18 @@ class Main {
         // If it receive message from that channel, it would send message with channel 
         // 'save-text-win-value' to control bar window and close text window.
         ipcMain.on('save-text-win-value', (event, args) => {
-            homeWin.webContents.send('save-text-win-value', args);
+            this.homeWin.webContents.send('save-text-win-value', args);
             textWin.close();
             textWin = null;
         });
 
-        ipcMain.on('click-text-btn', () => homeWin.webContents.send('open-text-win'));
+        // ipcMain.on('click-text-btn', () => this.homeWin.webContents.send('open-text-win'));
 
-        ipcMain.on('click-dragsnip-btn', () => homeWin.webContents.send('drag-snip'));
+        // ipcMain.on('click-dragsnip-btn', () => this.homeWin.webContents.send('drag-snip'));
 
-        ipcMain.on('click-audio-btn', () => homeWin.webContents.send('record-audio'));
+        // ipcMain.on('click-audio-btn', () => this.homeWin.webContents.send('record-audio'));
 
-        ipcMain.on('click-video-btn', () => homeWin.webContents.send('record-video'));
+        // ipcMain.on('click-video-btn', () => this.homeWin.webContents.send('record-video'));
 
         // Keep listening on channel 'quit-click'.
         // If it receive message from that channel, it would close control bar window
@@ -172,18 +165,18 @@ class Main {
         // If it receive message from that channel, it would create a new home window if not existed.
         ipcMain.on('click-home', () => {
             // Maximize and focus on it.
-            homeWin.maximize();
-            homeWin.focus();
+            this.homeWin.maximize();
+            this.homeWin.focus();
         });
 
         // Keep listening on channel 'file-open-click'.
         ipcMain.on('file-open-click', (event, args) => {
             // Load collection.html to home window. 
-            homeWin = browserWindow.changeHomeToCollection(homeWin);
+            this.homeWin = browserWindow.changeHomeToCollection(this.homeWin);
 
             if (controlbarWin === null) {
                 controlbarWin = browserWindow.createControlBarWindow(controlbarWin);
-                useCapture(homeWin);
+                useCapture(this.homeWin);
             } else {
                 controlbarWin.focus();
             }
@@ -201,7 +194,7 @@ class Main {
             ipcMain.on('init-collection', () => {
                 // If it receive message from that channel, it would send message to 
                 // control bar window with channel 'init-collection'.
-                homeWin.webContents.send('init-collection', args);
+                this.homeWin.webContents.send('init-collection', args);
             });
         });
 
@@ -209,13 +202,13 @@ class Main {
         // If it receive message from that channel, it would send message to home window
         // with channel 'init-collection-title'.
         ipcMain.on('init-collection-title', (event, args) => {
-            if (homeWin !== null) homeWin.webContents.send('init-collection-title', args);
+            if (this.homeWin !== null) this.homeWin.webContents.send('init-collection-title', args);
         });
 
         // Keep listening on channel 'return-to-home'.
         ipcMain.on('return-to-home', () => {
             // Load home.html into home window.
-            homeWin = browserWindow.changeCollectionToHome(homeWin);
+            this.homeWin = browserWindow.changeCollectionToHome(this.homeWin);
 
             // Close control bar window if existed.
             if (controlbarWin !== null) {
@@ -357,38 +350,38 @@ class Main {
         // If it receive message from that channel, it would send message to home window
         // with channel 'pre-step-click'.
         ipcMain.on('pre-step-click', () => {
-            homeWin.webContents.send('pre-step-click');
+            this.homeWin.webContents.send('pre-step-click');
         });
 
         // Keep listening on channel 'next-step-click'.
         // If it receive message from that channel, it would send message to home window
         // with channel 'next-step-click'.
         ipcMain.on('next-step-click', () => {
-            homeWin.webContents.send('next-step-click');
+            this.homeWin.webContents.send('next-step-click');
         });
 
         // Keep listening on channel 'delete-selected-click'.
         // If it receive message from that channel, it would send message to home window
         // with channel 'delete-selected-click'.
         ipcMain.on('delete-selected-click', () => {
-            homeWin.webContents.send('delete-selected-click');
+            this.homeWin.webContents.send('delete-selected-click');
         });
 
         // Keep listening on channel 'mark-selected-click'.
         // If it receive message from that channel, it would send message to home window
         // with channel 'pre-selected-click'.
         ipcMain.on('mark-selected-click', () => {
-            homeWin.webContents.send('mark-selected-click');
+            this.homeWin.webContents.send('mark-selected-click');
         });
     }
 
     private createWindow() {
-        homeWin = browserWindow.createHomeWindow(homeWin);
+        this.homeWin = browserWindow.createHomeWindow(this.homeWin);
         // tray = noteTray.enable(controlbarWin);  // Show Win10's tray at bottom right of your screen
-
         const { screen } = require('electron');
         const size = screen.getPrimaryDisplay().workAreaSize;
         browserWindow.setControlBarPosition(size);
+
     }
 
     private onWindowAllClosed() {
@@ -398,11 +391,20 @@ class Main {
     }
 
     private onActivate() {
-        if (homeWin === null) {
-            homeWin = browserWindow.createControlBarWindow();
+        if (this.homeWin === null) {
+            this.homeWin = browserWindow.createControlBarWindow();
         }
+    }
+
+    private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
+
+        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, request, this.homeWin)))
     }
 }
 
+
 // Here we go!
-(new Main()).init();
+(new Main()).init([
+    new ShortcutChannel('register-shortcuts'),
+    new ShortcutChannel('unregister-shortcuts')
+]);
