@@ -173,17 +173,6 @@ class Main {
             if (this.homeWin !== null) this.homeWin.webContents.send('init-collection-title', args);
         });
 
-        // Keep listening on channel 'return-to-home'.
-        ipcMain.on('return-to-home', () => {
-            // Load home.html into home window.
-            this.homeWin = browserWindow.changeCollectionToHome(this.homeWin);
-
-            // Close control bar window if existed.
-            if (controlbarWin !== null) {
-                controlbarWin.close();
-                controlbarWin = null;
-            }
-        });
 
         // Keep listening on channel 'update-collections'.
         ipcMain.on('update-collections', (event) => {
@@ -312,34 +301,6 @@ class Main {
                     collectionIdx: args.collectionIdx
                 });
             });
-        });
-
-        // Keep listening on channel 'pre-step-click'.
-        // If it receive message from that channel, it would send message to home window
-        // with channel 'pre-step-click'.
-        ipcMain.on('pre-step-click', () => {
-            this.homeWin.webContents.send('pre-step-click');
-        });
-
-        // Keep listening on channel 'next-step-click'.
-        // If it receive message from that channel, it would send message to home window
-        // with channel 'next-step-click'.
-        ipcMain.on('next-step-click', () => {
-            this.homeWin.webContents.send('next-step-click');
-        });
-
-        // Keep listening on channel 'delete-selected-click'.
-        // If it receive message from that channel, it would send message to home window
-        // with channel 'delete-selected-click'.
-        ipcMain.on('delete-selected-click', () => {
-            this.homeWin.webContents.send('delete-selected-click');
-        });
-
-        // Keep listening on channel 'mark-selected-click'.
-        // If it receive message from that channel, it would send message to home window
-        // with channel 'pre-selected-click'.
-        ipcMain.on('mark-selected-click', () => {
-            this.homeWin.webContents.send('mark-selected-click');
         });
     }
 
