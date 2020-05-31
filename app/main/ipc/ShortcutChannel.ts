@@ -1,7 +1,7 @@
 import { IpcChannelInterface } from "./IpcChannelInterface";
-import { IpcMainEvent, IpcMain, BrowserWindow, globalShortcut } from "electron";
-import { IpcRequest } from "../../shared/IpcRequest";
-import { execSync } from "child_process";
+import { IpcMainEvent, BrowserWindow, globalShortcut } from "electron";
+// import { IpcRequest } from "../../shared/IpcRequest";
+
 
 
 
@@ -15,13 +15,7 @@ export class ShortcutChannel implements IpcChannelInterface {
         return this.channelName
     }
 
-    handle(event: IpcMainEvent, request: IpcRequest, homeWin: BrowserWindow): void {
-        // if (request.responseChannel) {
-        //     request.responseChannel = `${this.getName()}_response`;
-        // }
-
-        console.log("hello world bitch")
-
+    handle(event: IpcMainEvent,  homeWin: BrowserWindow): void {
 
         globalShortcut.register('Shift+F1', () => {
             // Send message to home window with channel 'full-snip'

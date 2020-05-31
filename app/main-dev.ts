@@ -1,6 +1,7 @@
 import { app, ipcMain, globalShortcut, dialog, BrowserWindow } from "electron";
 import { IpcChannelInterface } from "./main/ipc/IpcChannelInterface";
 import { ShortcutChannel } from "./main/ipc/ShortcutChannel";
+import { FunctionBtnChannel } from "./main/ipc/FunctionBtnChannel";
 const fs = require('fs');
 const path = require('path');
 
@@ -39,14 +40,14 @@ class Main {
             mediaDir = res.mediaDir;
         });
 
-        app.on('ready', async() => { 
+        app.on('ready', async () => {
             await this.createWindow()
             this.registerIpcChannels(ipcChannels)
-         });
+        });
         app.on('window-all-closed', this.onWindowAllClosed);
         app.on('activate', this.onActivate);
 
-        
+
 
         // Keep listening on channel 'register-shortcuts'.
         // If it receive message from that channel, it would register global shortcuts,
@@ -55,33 +56,7 @@ class Main {
         // globalShortcut.register('Shift+F1', () => {
         //     controlbarWin.webContents.send('Shift+F1');
         // });
-        // When pressed Shift+F1, it will send message with channel 'Shift+F1'.
-        // ipcMain.on('register-shortcuts', () => {
-        //     globalShortcut.register('Shift+F1', () => {
-        //         // Send message to home window with channel 'full-snip'
-        //         homeWin.webContents.send('full-snip');
-        //     });
 
-        //     globalShortcut.register('Shift+F2', () => {
-        //         // Send message to home window with channel 'open-text-win'
-        //         homeWin.webContents.send('open-text-win');
-        //     });
-
-        //     globalShortcut.register('Shift+F3', () => {
-        //         // Send message to home window with channel 'drag-snip'
-        //         homeWin.webContents.send('drag-snip');
-        //     });
-
-        //     globalShortcut.register('Shift+F4', () => {
-        //         // Send message to home window with channel 'record-audio'
-        //         homeWin.webContents.send('record-audio');
-        //     });
-
-        //     globalShortcut.register('Shift+F5', () => {
-        //         // Send message to home window with channel 'record-video'
-        //         homeWin.webContents.send('record-video');
-        //     });
-        // });
 
         // Keep listening on channel 'unregister-shortcuts'.
         // If it receive message from that channel, it would unregister all global shortcuts, 
@@ -141,13 +116,6 @@ class Main {
             textWin = null;
         });
 
-        // ipcMain.on('click-text-btn', () => this.homeWin.webContents.send('open-text-win'));
-
-        // ipcMain.on('click-dragsnip-btn', () => this.homeWin.webContents.send('drag-snip'));
-
-        // ipcMain.on('click-audio-btn', () => this.homeWin.webContents.send('record-audio'));
-
-        // ipcMain.on('click-video-btn', () => this.homeWin.webContents.send('record-video'));
 
         // Keep listening on channel 'quit-click'.
         // If it receive message from that channel, it would close control bar window
@@ -398,7 +366,7 @@ class Main {
 
     private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
 
-        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, request, this.homeWin)))
+        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, this.homeWin)))
     }
 }
 
@@ -406,5 +374,8 @@ class Main {
 // Here we go!
 (new Main()).init([
     new ShortcutChannel('register-shortcuts'),
-    new ShortcutChannel('unregister-shortcuts')
+    new FunctionBtnChannel('click-text-btn'),
+    new FunctionBtnChannel('click-dragsnip-btn'),
+    new FunctionBtnChannel('click-audio-btn'),
+    new FunctionBtnChannel('click-video-btn')
 ]);
