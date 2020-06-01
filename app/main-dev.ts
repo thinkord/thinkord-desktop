@@ -5,11 +5,6 @@ import { FunctionBtnChannel } from "./main/ipc/FunctionBtnChannel";
 import { SystemBtnChannel } from "./main/ipc/SystemBtnChannel";
 const fs = require('fs');
 const path = require('path');
-
-
-// Electron module
-// const { app, ipcMain, globalShortcut, dialog } = require('electron');
-// const noteTray = require('./note-tray');
 const browserWindow = require('./main/browser-window');  // All functions related to browser window are defined here
 
 // Third party module
@@ -23,12 +18,6 @@ let mediaDir;  // Path to media directory, which stores media files
 
 // // Make Win10 notification available
 // app.setAppUserModelId(process.execPath);
-
-
-let controlbarWin = null;  // Control bar window
-let textWin = null;  // Text window
-// let homeWin = null;  // Home window
-// let tray = null;
 
 require('dotenv').config();
 
@@ -53,29 +42,6 @@ class Main {
         app.on('window-all-closed', this.onWindowAllClosed);
         app.on('activate', async () => {
             await this.onActivate()
-        });
-
-
-
-        // Keep listening on channel 'register-shortcuts'.
-        // If it receive message from that channel, it would register global shortcuts,
-        // which will send message with specified channel to controlbar window. 
-        // E.g. For below code snippet:
-        // globalShortcut.register('Shift+F1', () => {
-        //     controlbarWin.webContents.send('Shift+F1');
-        // });
-
-
-        // Keep listening on channel 'unregister-shortcuts'.
-        // If it receive message from that channel, it would unregister all global shortcuts, 
-        // and register 'Ctrl+Shift+s' again. 
-        ipcMain.on('unregister-shortcuts', () => {
-            globalShortcut.unregisterAll();
-
-            // Let user always send message to control bar window with channel 'Ctrl+Shift+s'.
-            globalShortcut.register('Ctrl+Shift+s', () => {
-                controlbarWin.webContents.send('Ctrl+Shift+s');
-            });
         });
 
         // Keep listening on channel 'save-collection'.
@@ -240,23 +206,21 @@ class Main {
             app.quit()
         }
     }
-
     private onActivate(): BrowserWindow {
         if (this.wins["homeWin"] === null) {
             this.wins["homeWin"] = browserWindow.createControlBarWindow();
             return this.wins["homeWin"]
         }
     }
-
     private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
         ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, args) => channel.handle(event, this.wins, args)))
     }
 }
 
-
-// Here we go!
+// The whole channels we register when initializing
 (new Main()).init([
     new ShortcutChannel('register-shortcuts'),
+    new ShortcutChannel('unregister-shortcuts'),
     new FunctionBtnChannel('click-text-btn'),
     new FunctionBtnChannel('click-dragsnip-btn'),
     new FunctionBtnChannel('click-audio-btn'),
