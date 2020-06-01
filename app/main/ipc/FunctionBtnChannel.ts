@@ -11,19 +11,19 @@ export class FunctionBtnChannel implements IpcChannelInterface {
     getName(): string {
         return this.channelName
     }
-    handle(event: IpcMainEvent, homeWin: BrowserWindow): void {
+    handle(event: IpcMainEvent, Wins:Object): void {
         switch (this.getName()) {
             case 'click-text-btn':
-                homeWin.webContents.send('open-text-win')
+                Wins["homeWin"].webContents.send('open-text-win')
                 break;
             case 'click-dragsnip-btn':
-                homeWin.webContents.send('drag-snip')
+                Wins["homeWin"].webContents.send('drag-snip')
                 break;
             case 'click-audio-btn':
-                homeWin.webContents.send('record-audio')
+                Wins["homeWin"].webContents.send('record-audio')
                 break;
             case 'click-video-btn':
-                homeWin.webContents.send('record-video')
+                Wins["homeWin"].webContents.send('record-video')
                 break;
         }
     }

@@ -2,6 +2,7 @@ import { app, ipcMain, globalShortcut, dialog, BrowserWindow } from "electron";
 import { IpcChannelInterface } from "./main/ipc/IpcChannelInterface";
 import { ShortcutChannel } from "./main/ipc/ShortcutChannel";
 import { FunctionBtnChannel } from "./main/ipc/FunctionBtnChannel";
+import { SystemBtnChannel } from "./main/ipc/SystemBtnChannel";
 const fs = require('fs');
 const path = require('path');
 
@@ -32,7 +33,12 @@ let textWin = null;  // Text window
 require('dotenv').config();
 
 class Main {
-    homeWin: BrowserWindow
+    wins: Object = {
+        homeWin: BrowserWindow,
+        controlBarWin: BrowserWindow,
+        textWin: BrowserWindow
+    }
+    // homeWin: BrowserWindow
     public async init(ipcChannels: IpcChannelInterface[]) {
         initUserEnv().then(res => {
             appSettingPath = res.appSettingPath;
@@ -45,7 +51,9 @@ class Main {
             this.registerIpcChannels(ipcChannels)
         });
         app.on('window-all-closed', this.onWindowAllClosed);
-        app.on('activate', this.onActivate);
+        app.on('activate', async () => {
+            await this.onActivate()
+        });
 
 
 
@@ -68,18 +76,6 @@ class Main {
             globalShortcut.register('Ctrl+Shift+s', () => {
                 controlbarWin.webContents.send('Ctrl+Shift+s');
             });
-        });
-
-        // Keep listening on channel 'savebutton'.
-        // If it receive message from that channel, it would send message to home window with channel 'savebutton'.
-        ipcMain.on('savebutton', () => {
-            if (this.homeWin !== null) this.homeWin.webContents.send('savebutton');
-        });
-
-        // Keep listening on channel 'hidesavebutton'.
-        // If it receive message from that channel, it would send message to home window with channel 'hidesavebutton'.
-        ipcMain.on('hidesavebutton', () => {
-            if (this.homeWin !== null) this.homeWin.webContents.send('hidesavebutton');
         });
 
         // Keep listening on channel 'save-collection'.
@@ -111,7 +107,7 @@ class Main {
         // If it receive message from that channel, it would send message with channel 
         // 'save-text-win-value' to control bar window and close text window.
         ipcMain.on('save-text-win-value', (event, args) => {
-            this.homeWin.webContents.send('save-text-win-value', args);
+            this.wins["homeWin"].webContents.send('save-text-win-value', args);
             textWin.close();
             textWin = null;
         });
@@ -133,18 +129,18 @@ class Main {
         // If it receive message from that channel, it would create a new home window if not existed.
         ipcMain.on('click-home', () => {
             // Maximize and focus on it.
-            this.homeWin.maximize();
-            this.homeWin.focus();
+            this.wins["homeWin"].maximize();
+            this.wins["homeWin"].focus();
         });
 
         // Keep listening on channel 'file-open-click'.
         ipcMain.on('file-open-click', (event, args) => {
             // Load collection.html to home window. 
-            this.homeWin = browserWindow.changeHomeToCollection(this.homeWin);
+            this.wins["homeWin"] = browserWindow.changeHomeToCollection(this.wins["homeWin"]);
 
             if (controlbarWin === null) {
                 controlbarWin = browserWindow.createControlBarWindow(controlbarWin);
-                useCapture(this.homeWin);
+                useCapture(this.wins["homeWin"]);
             } else {
                 controlbarWin.focus();
             }
@@ -162,7 +158,7 @@ class Main {
             ipcMain.on('init-collection', () => {
                 // If it receive message from that channel, it would send message to 
                 // control bar window with channel 'init-collection'.
-                this.homeWin.webContents.send('init-collection', args);
+                this.wins["homeWin"].webContents.send('init-collection', args);
             });
         });
 
@@ -170,7 +166,7 @@ class Main {
         // If it receive message from that channel, it would send message to home window
         // with channel 'init-collection-title'.
         ipcMain.on('init-collection-title', (event, args) => {
-            if (this.homeWin !== null) this.homeWin.webContents.send('init-collection-title', args);
+            if (this.wins["homeWin"] !== null) this.wins["homeWin"].webContents.send('init-collection-title', args);
         });
 
 
@@ -304,13 +300,16 @@ class Main {
         });
     }
 
-    private createWindow() {
-        this.homeWin = browserWindow.createHomeWindow(this.homeWin);
+    private createWindow(): BrowserWindow {
+        this.wins["homeWin"] = browserWindow.createHomeWindow(this.wins["homeWin"]);
+        // this.wins["home"] = this.wins["homeWin"]
+        // console.log("fucking wins: ", this.wins)
         // tray = noteTray.enable(controlbarWin);  // Show Win10's tray at bottom right of your screen
         const { screen } = require('electron');
         const size = screen.getPrimaryDisplay().workAreaSize;
         browserWindow.setControlBarPosition(size);
 
+        return this.wins["homeWin"]
     }
 
     private onWindowAllClosed() {
@@ -319,15 +318,15 @@ class Main {
         }
     }
 
-    private onActivate() {
-        if (this.homeWin === null) {
-            this.homeWin = browserWindow.createControlBarWindow();
+    private onActivate(): BrowserWindow {
+        if (this.wins["homeWin"] === null) {
+            this.wins["homeWin"] = browserWindow.createControlBarWindow();
+            return this.wins["homeWin"]
         }
     }
 
     private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
-
-        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, this.homeWin)))
+        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, args) => channel.handle(event, this.wins)))
     }
 }
 
@@ -338,5 +337,7 @@ class Main {
     new FunctionBtnChannel('click-text-btn'),
     new FunctionBtnChannel('click-dragsnip-btn'),
     new FunctionBtnChannel('click-audio-btn'),
-    new FunctionBtnChannel('click-video-btn')
+    new FunctionBtnChannel('click-video-btn'),
+    new SystemBtnChannel('savebutton'),
+    new SystemBtnChannel('hidesavebutton')
 ]);
