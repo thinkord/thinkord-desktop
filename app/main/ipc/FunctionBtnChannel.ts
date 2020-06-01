@@ -11,7 +11,7 @@ export class FunctionBtnChannel implements IpcChannelInterface {
     getName(): string {
         return this.channelName
     }
-    handle(event: IpcMainEvent, Wins:Object): void {
+    handle(event: IpcMainEvent, Wins:Object, args: any): void {
         switch (this.getName()) {
             case 'click-text-btn':
                 Wins["homeWin"].webContents.send('open-text-win')

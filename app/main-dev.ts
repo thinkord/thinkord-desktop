@@ -34,9 +34,9 @@ require('dotenv').config();
 
 class Main {
     wins: Object = {
-        homeWin: BrowserWindow,
-        controlBarWin: BrowserWindow,
-        textWin: BrowserWindow
+        homeWin: null,
+        controlbarWin: null,
+        textWin: null
     }
     // homeWin: BrowserWindow
     public async init(ipcChannels: IpcChannelInterface[]) {
@@ -83,83 +83,6 @@ class Main {
         // back to the original sender.
         ipcMain.on('save-collection', (event) => {
             event.reply('save-collection');
-        });
-
-        // Keep listening on channel 'download-html'.
-        // If it receive message from that channel, it would show a win10 save dialog. 
-
-
-        // Keep listening on channel 'open-text-win'.
-        // If it receive message from that channel, it would create a new text window if not existed.
-        ipcMain.on('open-text-win', () => {
-            if (textWin === null) textWin = browserWindow.createTextWindow(textWin, controlbarWin);
-            textWin.focus();
-        });
-
-        // Keep listening on channel 'close-text-win'.
-        // If it receive message from that channel, it would close text window.
-        ipcMain.on('close-text-win', () => {
-            textWin.close();
-            textWin = null;
-        });
-
-        // Keep listening on channel 'twin-ok'.
-        // If it receive message from that channel, it would send message with channel 
-        // 'save-text-win-value' to control bar window and close text window.
-        ipcMain.on('save-text-win-value', (event, args) => {
-            this.wins["homeWin"].webContents.send('save-text-win-value', args);
-            textWin.close();
-            textWin = null;
-        });
-
-
-        // Keep listening on channel 'quit-click'.
-        // If it receive message from that channel, it would close control bar window
-        // and close text window if existed.
-        ipcMain.on('quit-click', () => {
-            controlbarWin.close();
-            controlbarWin = null;
-            if (textWin !== null) {
-                textWin.close();
-                textWin = null;
-            }
-        });
-
-        // Keep listening on channel 'click-home'.
-        // If it receive message from that channel, it would create a new home window if not existed.
-        ipcMain.on('click-home', () => {
-            // Maximize and focus on it.
-            this.wins["homeWin"].maximize();
-            this.wins["homeWin"].focus();
-        });
-
-        // Keep listening on channel 'file-open-click'.
-        ipcMain.on('file-open-click', (event, args) => {
-            // Load collection.html to home window. 
-            this.wins["homeWin"] = browserWindow.changeHomeToCollection(this.wins["homeWin"]);
-
-            if (controlbarWin === null) {
-                controlbarWin = browserWindow.createControlBarWindow(controlbarWin);
-                useCapture(this.wins["homeWin"]);
-            } else {
-                controlbarWin.focus();
-            }
-
-            // Keep listening on event 'move'.
-            // If control bar window is moved, text window will be closed.
-            controlbarWin.on('move', () => {
-                if (textWin !== null) {
-                    textWin.close();
-                    textWin = null;
-                }
-            });
-
-            // Keep listening on channel 'init-collection'.
-            ipcMain.on('init-collection', () => {
-                // If it receive message from that channel, it would send message to 
-                // control bar window with channel 'init-collection'.
-                this.wins["homeWin"].webContents.send('init-collection', args);
-            });
         });
 
         // Keep listening on channel 'init-collection-title'.
@@ -303,7 +226,7 @@ class Main {
     private createWindow(): BrowserWindow {
         this.wins["homeWin"] = browserWindow.createHomeWindow(this.wins["homeWin"]);
         // this.wins["home"] = this.wins["homeWin"]
-        // console.log("fucking wins: ", this.wins)
+        console.log("fucking wins: ", this.wins)
         // tray = noteTray.enable(controlbarWin);  // Show Win10's tray at bottom right of your screen
         const { screen } = require('electron');
         const size = screen.getPrimaryDisplay().workAreaSize;
@@ -326,7 +249,7 @@ class Main {
     }
 
     private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
-        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, args) => channel.handle(event, this.wins)))
+        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, args) => channel.handle(event, this.wins, args)))
     }
 }
 
@@ -339,5 +262,11 @@ class Main {
     new FunctionBtnChannel('click-audio-btn'),
     new FunctionBtnChannel('click-video-btn'),
     new SystemBtnChannel('savebutton'),
-    new SystemBtnChannel('hidesavebutton')
+    new SystemBtnChannel('hidesavebutton'),
+    new SystemBtnChannel('click-home'),
+    new SystemBtnChannel('file-open-click'),
+    new SystemBtnChannel('open-text-win'),
+    new SystemBtnChannel('close-text-win'),
+    new SystemBtnChannel('save-text-win-value'),
+    new SystemBtnChannel('quit-click')
 ]);

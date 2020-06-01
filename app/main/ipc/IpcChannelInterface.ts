@@ -4,6 +4,6 @@ import { IpcMainEvent, BrowserWindow } from "electron";
 export interface IpcChannelInterface {
     channelName: string
     getName(): string;
-    handle(event: IpcMainEvent, Wins: any): void;
+    handle(event: IpcMainEvent, Wins: Object,args:any): void;
 }
 

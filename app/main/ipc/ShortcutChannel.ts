@@ -15,7 +15,7 @@ export class ShortcutChannel implements IpcChannelInterface {
         return this.channelName
     }
 
-    handle(event: IpcMainEvent,  Wins:Object): void {
+    handle(event: IpcMainEvent,  Wins:Object, args: any): void {
 
         globalShortcut.register('Shift+F1', () => {
             // Send message to home window with channel 'full-snip'
