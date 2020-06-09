@@ -27,8 +27,8 @@ locally.
 ```sh
 $ git clone git@github.com:username/thinkord-desktop.git
 $ cd thinkord-desktop
-$ git remote add origin https://github.com/thinkord/thinkord-desktop.git
-$ git fetch origin
+$ git remote add upstream https://github.com/thinkord/thinkord-desktop.git
+$ git fetch upstream
 ```
 
 <!-- ### Step 2: Build
@@ -47,7 +47,7 @@ To keep your development environment organized, create local branches to
 hold your work. These should be branched directly off of the `master` branch.
 
 ```sh
-$ git checkout -b my-branch -t origin/master
+$ git checkout -b my-branch -t upstream/master
 ```
 
 ## Making Changes
@@ -127,8 +127,8 @@ Once you have committed your changes, it is a good idea to use `git rebase`
 (not `git merge`) to synchronize your work with the main repository.
 
 ```sh
-$ git fetch origin
-$ git rebase origin/master
+$ git fetch upstream
+$ git rebase upstream/master
 ```
 
 This ensures that your working branch has the latest changes from `thinkord/thinkord-desktop`
@@ -168,7 +168,7 @@ begin the process of opening a pull request by pushing your working branch
 to your fork on GitHub.
 
 ```sh
-$ git push origin my-branch
+$ git push upstream my-branch
 ```
 
 ### Step 8: Opening the Pull Request
@@ -202,7 +202,7 @@ GitHub will automatically update the pull request.
 ```sh
 $ git add my/changed/files
 $ git commit
-$ git push origin my-branch
+$ git push upstream my-branch
 ```
 
 There are a number of more advanced mechanisms for managing commits using
