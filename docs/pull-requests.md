@@ -168,7 +168,7 @@ begin the process of opening a pull request by pushing your working branch
 to your fork on GitHub.
 
 ```sh
-$ git push upstream my-branch
+$ git push origin my-branch
 ```
 
 ### Step 8: Opening the Pull Request
@@ -202,7 +202,7 @@ GitHub will automatically update the pull request.
 ```sh
 $ git add my/changed/files
 $ git commit
-$ git push upstream my-branch
+$ git push origin my-branch
 ```
 
 There are a number of more advanced mechanisms for managing commits using
