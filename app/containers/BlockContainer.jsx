@@ -1,10 +1,11 @@
 // React module
 import React, { Component } from 'react';
 
-import ImageBlock from '../components/ImageBlock';
-import VideoBlock from "../components/VideoBlock";
-import TextBlock from "../components/TextBlock";
-import AudioBlock from "../components/AudioBlock";
+// import ImageBlock from '../components/ImageBlock';
+import ImageBlock from '../components/ImageBlock/ImageBlock';
+import VideoBlock from "../components/VideoBlock/VideoBlock";
+import TextBlock from "../components/TextBlock/TextBlock";
+import AudioBlock from "../components/AudioBlock/AudioBlock";
 
 // Electron module
 import { ipcRenderer } from "electron";

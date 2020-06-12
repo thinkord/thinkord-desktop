@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import BlockTitle from './BlockTitle';
-import BlockDescription from './BlockDescription';
+import BlockTitle from "../BlockTitle/BlockTitle";
+import BlockDescription from "../BlockDescription";
 
-import { speech2text } from '../media-capturer/speech2text';
+import { speech2text } from '../../media-capturer/speech2text';
 
 // Icons
-import BlockIcon from "../asset/collection/microphone.svg";
-import TrashIcon from "../asset/collection/trash-alt.svg";
-import AngleIcon from "../asset/collection/angle-up.svg";
-import MarkIcon from "../asset/collection/bookmark.svg";
-import MarkFullIcon from "../asset/collection/bookmark-full.svg";
+import BlockIcon from "../../asset/collection/microphone.svg";
+import TrashIcon from "../../asset/collection/trash-alt.svg";
+import AngleIcon from "../../asset/collection/angle-up.svg";
+import MarkIcon from "../../asset/collection/bookmark.svg";
+import MarkFullIcon from "../../asset/collection/bookmark-full.svg";
 
 export default function AudioBlock(props) {
     const scaleid = "scale_" + props.block.timestamp;
