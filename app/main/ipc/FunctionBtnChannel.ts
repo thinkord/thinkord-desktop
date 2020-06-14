@@ -12,7 +12,7 @@ export class FunctionBtnChannel implements IpcChannelInterface {
         return this.channelName;
     }
 
-    handle(event: IpcMainEvent, Wins: Object, args: any): void {
+    dispatch(event: IpcMainEvent, Wins: Object, args: any): void {
         switch (this.getName()) {
             case 'click-text-btn':
                 Wins["homeWin"].webContents.send('open-text-win');

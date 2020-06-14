@@ -14,7 +14,7 @@ export class SystemBtnChannel implements IpcChannelInterface {
         return this.channelName;
     }
 
-    handle(event: IpcMainEvent, wins: Object, args: any): void {
+    dispatch(event: IpcMainEvent, wins: Object, args: any): void {
         switch (this.getName()) {
             case 'savebutton':
                 if (wins["homeWin"] !== null)
