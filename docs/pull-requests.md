@@ -49,6 +49,22 @@ hold your work. These should be branched directly off of the `master` branch.
 ```sh
 $ git checkout -b my-branch -t upstream/master
 ```
+Examples of branch names:
+  - `feature/ipc-main`
+  - `bugfix/user-login`
+  - `release/v1.0.0`
+#### Branch naming guidelines
+
+Common prefixes:
+
+  - feature: Any code changes for a new module or use case should be done on a feature branch.
+  - test: Contains all codes ready for QA testing.
+  - bugfix: If the code changes made from the feature branch were rejected after a release, sprint or demo, any necessary fixes after that should be done on the bugfix branch.
+  - hotfix: If there is a need to fix a blocker, do a temporary patch, apply a critical framework or configuration change that should be handled immediately, it should be created as a Hotfix.
+  - experimental: Any new feature or idea that is not part of a release or a sprint. A branch for playing around.
+  - build: A branch specifically for creating specific build artifacts or for doing code coverage runs. 
+  - merge: A temporary branch for resolving merge conflicts, usually between the latest development and a feature or Hotfix branch.
+  - release: A branch for tagging a specific release version
 
 ## Making Changes
 
