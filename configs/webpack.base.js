@@ -5,7 +5,7 @@ module.exports = {
         polyfill: '@babel/polyfill',
     },
     resolve: {
-        extensions: [".ts",".jsx", ".js"]
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
     },
     module: {
         rules: [
@@ -22,7 +22,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.ts$/,
+                test: /\.ts(x?)$/,
                 include: /app/,
                 use: [{ loader: 'ts-loader' }]
             },

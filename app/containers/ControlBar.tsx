@@ -17,8 +17,22 @@ import ScreenShotButton from '../asset/screenshot.png';
 import Substract from '../asset/substract.png';
 import HomeButton from '../asset/home.png';
 import QuitButton from '../asset/error.png';
+import { array } from 'prop-types';
 
-export default class ControlBar extends Component {
+type button = {
+    id: string,
+    src: any,
+    disable: boolean,
+    tip: string
+}
+
+type ControlBarState = {
+    controlbar_button: button[],
+    isRecord: boolean,
+    audioRecorder: any
+}
+
+export default class ControlBar extends Component<{}, ControlBarState> {
     constructor(props) {
         super(props);
 
@@ -46,7 +60,7 @@ export default class ControlBar extends Component {
 
     //start to record the note
     handleStart = () => {
-        if (this.state.isRecord === false) {
+        if ((this.state as any).isRecord === false) {
             this.setState({ isRecord: true });
 
             const button = this.state.controlbar_button.map(button => {
@@ -122,14 +136,14 @@ export default class ControlBar extends Component {
      * @method
      */
     handleAudio = () => {
-        const button = this.state.controlbar_button.map(button => {
+        const buttons = this.state.controlbar_button.map(button => {
             if (button.id == 'audio') {
                 if (button.src == AudioButton) button.src = AudioStartButton;
                 else button.src = AudioButton;
             }
-            return button;
+            return buttons;
         });
-        this.setState({ button });
+        this.setState({ controlbar_button: buttons });
 
         ipcRenderer.send('click-audio-btn');
     }
@@ -140,14 +154,14 @@ export default class ControlBar extends Component {
      * @method
      */
     handleVideo = () => {
-        const button = this.state.controlbar_button.map(button => {
+        const buttons = this.state.controlbar_button.map(button => {
             if (button.id == 'video') {
                 if (button.src == VideoButton) button.src = VideoStartButton;
                 else button.src = VideoButton;
             }
-            return button;
+            return buttons;
         });
-        this.setState({ button });
+        this.setState({ controlbar_button: buttons });
         ipcRenderer.send('click-video-btn');
     }
 
