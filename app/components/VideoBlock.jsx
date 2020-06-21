@@ -3,7 +3,7 @@ import { Player, BigPlayButton } from 'video-react';
 import '../../node_modules/video-react/dist/video-react.css';
 import BlockTitle from "./BlockTitle";
 import BlockDescription from "./BlockDescription";
-import Upload from "./Upload";
+import Attachment from "./Attachment/Attachment";
 
 // Icons
 import BlockIcon from "../asset/collection/youtube.svg";
@@ -58,7 +58,7 @@ export default function VideoBlock(props) {
                         time={props.block.timestamp}
                         handleLinker={props.handleLinker}
                     />
-                    <Upload
+                    <Attachment
                         paths={props.block.paths}
                         time={props.block.timestamp}
                         addFile={props.addFile}

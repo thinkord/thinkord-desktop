@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Upload from './Upload';
+import Attachment from './Attachment/Attachment';
 import BlockTitle from './BlockTitle';
 import BlockDescription from "./BlockDescription"
 
@@ -52,7 +52,7 @@ export default function TextBlock(props) {
                         time={props.block.timestamp}
                         handleLinker={props.handleLinker}
                     />
-                    <Upload
+                    <Attachment
                         paths={props.block.paths}
                         time={props.block.timestamp}
                         addFile={props.addFile}
