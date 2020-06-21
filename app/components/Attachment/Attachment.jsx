@@ -3,12 +3,13 @@ import Dropzone from 'react-dropzone';
 import { shell } from 'electron';
 import FileIcon from './FileIcon';
 import './attachment.scss';
+
 // Icons
 import CommonIcon from "./icons/file-alt.svg";
 import TrashIcon from "./icons/upload-trash-alt.svg";
 
 
-export class Upload extends Component {
+export class Attachment extends Component {
     constructor(props) {
         super(props);
 
@@ -88,8 +89,8 @@ export class Upload extends Component {
         return (
             <Dropzone onDrop={this.onDrop.bind(this)}>
                 {({ getRootProps, getInputProps, isDragActive }) => (
-                    <div className="container">
-                        <div {...getRootProps({ className: 'dropzone upload_file_zone' })}>
+                    <div className="attachment-container">
+                        <div {...getRootProps({ className: 'dropzone attachment_file_zone' })}>
                             <input {...getInputProps()} />
                             {isDragActive ? 'Drop it!' : 'Drag and drop some files here, or click to select files'}
                         </div>
@@ -104,4 +105,4 @@ export class Upload extends Component {
     }
 }
 
-export default Upload
+export default Attachment

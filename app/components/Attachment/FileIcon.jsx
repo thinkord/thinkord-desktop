@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import icon
+import './fileIcon.scss';
 import CommonIcon from"./icons/file-alt.svg"
 import ZipIcon from"./icons/file-archive.svg"
 import AudioIcon from"./icons/file-audio.svg"
