@@ -14,7 +14,7 @@ export class SystemBtnChannel implements IpcChannelInterface {
         return this.channelName;
     }
 
-    handle(event: IpcMainEvent, wins: Object, args: any): void {
+    dispatch(event: IpcMainEvent, wins: Object, args: any): void {
         switch (this.getName()) {
             case 'savebutton':
                 if (wins["homeWin"] !== null)
@@ -67,7 +67,6 @@ export class SystemBtnChannel implements IpcChannelInterface {
                 });
                 break;
             case 'quit-click':
-                console.log('fucking quit click')
                 wins["controlbarWin"].close();
                 wins["controlbarWin"] = null;
                 if (wins["textWin"] !== null) {

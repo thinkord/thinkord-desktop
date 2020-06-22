@@ -6,10 +6,10 @@ const path = require('path');
 
 module.exports = merge.smart(baseConfig, {
     entry: {
-        controlbar: './app/indexCB.jsx',
-        textwindow: './app/indexTW.jsx',
-        home: './app/indexHome.jsx',
-        collection: './app/indexCollection.jsx',
+        controlbar: './app/indexCB.tsx',
+        textwindow: './app/indexTW.tsx',
+        home: './app/indexHome.tsx',
+        collection: './app/indexCollection.tsx',
         dragsnip: './app/media-capturer/dragsnip/capture-renderer.js'
     },
     target: 'electron-renderer',

@@ -12,7 +12,7 @@ export class CollectionChannel implements IpcChannelInterface {
         return this.channelName;
     }
 
-    handle(event: IpcMainEvent, wins: Object, args: any): void {
+    dispatch(event: IpcMainEvent, wins: Object, args: any): void {
         switch (this.getName()) {
             case 'save-collection':
                 event.reply('save-collection');

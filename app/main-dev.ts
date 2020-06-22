@@ -1,4 +1,4 @@
-import { app, ipcMain, BrowserWindow } from "electron";
+import { app, ipcMain, BrowserWindow, globalShortcut } from "electron";
 import { IpcChannelInterface } from "./main/ipc/IpcChannelInterface";
 import { ShortcutChannel } from "./main/ipc/ShortcutChannel";
 import { FunctionBtnChannel } from "./main/ipc/FunctionBtnChannel";
@@ -42,27 +42,28 @@ class Main {
         const size = screen.getPrimaryDisplay().workAreaSize;
         browserWindow.setControlBarPosition(size);
 
-        return this.wins["homeWin"]
+        return this.wins["homeWin"];
     }
 
     private onWindowAllClosed() {
         if (process.platform !== 'darwin') app.quit();
     }
+
     private onActivate(): BrowserWindow {
         if (this.wins["homeWin"] === null) {
             this.wins["homeWin"] = browserWindow.createControlBarWindow();
-            return this.wins["homeWin"]
+            return this.wins["homeWin"];
         }
     }
+
     private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
-        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, args) => channel.handle(event, this.wins, args)))
+        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.dispatch(event, this.wins, request)));
     }
 }
 
 // The whole channels we register when initializing
 (new Main()).init([
-    new ShortcutChannel('register-shortcuts'),
-    new ShortcutChannel('unregister-shortcuts'),
+    new ShortcutChannel('shortcut'),
     new FunctionBtnChannel('click-text-btn'),
     new FunctionBtnChannel('click-dragsnip-btn'),
     new FunctionBtnChannel('click-audio-btn'),
