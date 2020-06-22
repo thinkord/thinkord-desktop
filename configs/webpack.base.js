@@ -5,10 +5,11 @@ module.exports = {
         polyfill: '@babel/polyfill',
     },
     resolve: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
+        extensions: [".jsx", ".js"]
     },
     module: {
         rules: [
+            // first loader: compile jsx
             {
                 test: /.jsx$/,
                 exclude: /node_modules/,
@@ -21,11 +22,7 @@ module.exports = {
                     }
                 }
             },
-            {
-                test: /\.ts(x?)$/,
-                include: /app/,
-                use: [{ loader: 'ts-loader' }]
-            },
+            // second loader: compile ES6
             {
                 test: /.js$/,
                 exclude: /node_modules/,
@@ -38,10 +35,12 @@ module.exports = {
                     }
                 }
             },
+            // loader: compile html
             {
                 test: /\.html$/,
                 use: "html-loader"
             },
+            // loader: compile css
             {
                 test: /.css$/,
                 use: [
@@ -49,11 +48,12 @@ module.exports = {
                     'css-loader'
                 ]
             },
+            // loader: compile image
             {
                 test: /\.(jpe?g|png|svg)$/,
                 use: 'file-loader?name=asset/[name].[ext]'
             }
         ]
     },
-    externals: ['pg', 'tedious', 'pg-hstore']
+    externals:['pg','tedious','pg-hstore']
 }

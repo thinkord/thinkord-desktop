@@ -4,7 +4,6 @@ import ControlBarButton from '../components/ControlBarButton';
 import './css/ControlBar.css';
 
 const { ipcRenderer } = require('electron');
-import { IpcClient } from '../renderer/ipc-client';
 
 // Import icon from assets folder
 import StartButton from '../asset/play-button.png';
@@ -19,22 +18,7 @@ import Substract from '../asset/substract.png';
 import HomeButton from '../asset/home.png';
 import QuitButton from '../asset/error.png';
 
-let ipcClient = new IpcClient();
-
-type button = {
-    id: string,
-    src: any,
-    disable: boolean,
-    tip: string
-}
-
-type ControlBarState = {
-    controlbar_button: button[],
-    isRecord: boolean,
-    audioRecorder: any
-}
-
-export default class ControlBar extends Component<{}, ControlBarState> {
+export default class ControlBar extends Component {
     constructor(props) {
         super(props);
 
@@ -61,7 +45,7 @@ export default class ControlBar extends Component<{}, ControlBarState> {
     }
 
     //start to record the note
-    handleStart = async () => {
+    handleStart = () => {
         if (this.state.isRecord === false) {
             this.setState({ isRecord: true });
 
@@ -87,7 +71,7 @@ export default class ControlBar extends Component<{}, ControlBarState> {
                 return button;
             });
 
-            ipcClient.send('shortcut', { type: 'POST' });
+            ipcRenderer.send('register-shortcuts');
             ipcRenderer.send('hidesavebutton');
             this.setState({ controlbar_button: button })
         } else {
@@ -115,7 +99,7 @@ export default class ControlBar extends Component<{}, ControlBarState> {
             });
 
             this.setState({ controlbar_button: button });
-            ipcClient.send('shortcut', { type: 'DELETE' });
+            ipcRenderer.send('unregister-shortcuts');
             ipcRenderer.send('savebutton');
         }
     }
@@ -138,14 +122,14 @@ export default class ControlBar extends Component<{}, ControlBarState> {
      * @method
      */
     handleAudio = () => {
-        const buttons = this.state.controlbar_button.map(button => {
+        const button = this.state.controlbar_button.map(button => {
             if (button.id == 'audio') {
                 if (button.src == AudioButton) button.src = AudioStartButton;
                 else button.src = AudioButton;
             }
-            return buttons;
+            return button;
         });
-        this.setState({ controlbar_button: buttons });
+        this.setState({ button });
 
         ipcRenderer.send('click-audio-btn');
     }
@@ -156,14 +140,14 @@ export default class ControlBar extends Component<{}, ControlBarState> {
      * @method
      */
     handleVideo = () => {
-        const buttons = this.state.controlbar_button.map(button => {
+        const button = this.state.controlbar_button.map(button => {
             if (button.id == 'video') {
                 if (button.src == VideoButton) button.src = VideoStartButton;
                 else button.src = VideoButton;
             }
-            return buttons;
+            return button;
         });
-        this.setState({ controlbar_button: buttons });
+        this.setState({ button });
         ipcRenderer.send('click-video-btn');
     }
 
