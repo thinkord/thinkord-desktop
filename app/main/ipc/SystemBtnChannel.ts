@@ -67,7 +67,6 @@ export class SystemBtnChannel implements IpcChannelInterface {
                 });
                 break;
             case 'quit-click':
-                console.log('fucking quit click')
                 wins["controlbarWin"].close();
                 wins["controlbarWin"] = null;
                 if (wins["textWin"] !== null) {

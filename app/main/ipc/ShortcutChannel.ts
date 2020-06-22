@@ -18,8 +18,10 @@ export class ShortcutChannel implements IpcChannelInterface {
         switch (request.type) {
             case 'POST':
                 registerShortcut(wins);
+                break;
             case 'DELETE':
                 unregisterShortcut(wins);
+                break;
         }
     }
 }

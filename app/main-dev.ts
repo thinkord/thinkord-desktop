@@ -1,4 +1,4 @@
-import { app, ipcMain, BrowserWindow } from "electron";
+import { app, ipcMain, BrowserWindow, globalShortcut } from "electron";
 import { IpcChannelInterface } from "./main/ipc/IpcChannelInterface";
 import { ShortcutChannel } from "./main/ipc/ShortcutChannel";
 import { FunctionBtnChannel } from "./main/ipc/FunctionBtnChannel";

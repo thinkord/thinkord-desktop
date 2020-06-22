@@ -4,6 +4,7 @@ import ControlBarButton from '../components/ControlBarButton';
 import './css/ControlBar.css';
 
 const { ipcRenderer } = require('electron');
+import { IpcClient } from '../renderer/ipc-client';
 
 // Import icon from assets folder
 import StartButton from '../asset/play-button.png';
@@ -17,7 +18,8 @@ import ScreenShotButton from '../asset/screenshot.png';
 import Substract from '../asset/substract.png';
 import HomeButton from '../asset/home.png';
 import QuitButton from '../asset/error.png';
-import { array } from 'prop-types';
+
+let ipcClient = new IpcClient();
 
 type button = {
     id: string,
@@ -59,8 +61,8 @@ export default class ControlBar extends Component<{}, ControlBarState> {
     }
 
     //start to record the note
-    handleStart = () => {
-        if ((this.state as any).isRecord === false) {
+    handleStart = async () => {
+        if (this.state.isRecord === false) {
             this.setState({ isRecord: true });
 
             const button = this.state.controlbar_button.map(button => {
@@ -85,7 +87,7 @@ export default class ControlBar extends Component<{}, ControlBarState> {
                 return button;
             });
 
-            ipcRenderer.send('register-shortcuts');
+            ipcClient.send('shortcut', { type: 'POST' });
             ipcRenderer.send('hidesavebutton');
             this.setState({ controlbar_button: button })
         } else {
@@ -113,7 +115,7 @@ export default class ControlBar extends Component<{}, ControlBarState> {
             });
 
             this.setState({ controlbar_button: button });
-            ipcRenderer.send('unregister-shortcuts');
+            ipcClient.send('shortcut', { type: 'DELETE' });
             ipcRenderer.send('savebutton');
         }
     }
