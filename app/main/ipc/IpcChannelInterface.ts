@@ -1,10 +1,8 @@
-import { IpcMain, IpcMainEvent } from "electron";
+import { IpcMainEvent } from "electron";
 import { IpcRequest } from "../../shared/IpcRequest";
 
 export interface IpcChannelInterface {
-
+    channelName: string
     getName(): string;
-
-    handle(event: IpcMainEvent, request: IpcRequest): void;
+    dispatch(event: IpcMainEvent, Wins: Object, request: IpcRequest): void;
 }
-
