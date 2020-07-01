@@ -7,7 +7,7 @@ const { ipcRenderer } = require('electron');
 // Third-party packages
 import '../css/Home.css';
 import { JSONManager } from '../../renderer/json-manager';
-import FileButton from '../../components/FileButton';
+import FileButton from '../../components/FileButton/FileButton';
 
 // Notification
 import Noty from 'noty';

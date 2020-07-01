@@ -4,8 +4,8 @@ import { shell } from 'electron';
 import FileIcon from './FileIcon';
 
 // Icons
-import CommonIcon from "../asset/uploadfile/file-alt.svg";
-import TrashIcon from "../asset/uploadfile/upload-trash-alt.svg";
+import CommonIcon from "../../asset/uploadfile/file-alt.svg";
+import TrashIcon from "../../asset/uploadfile/upload-trash-alt.svg";
 
 
 export class Upload extends Component {

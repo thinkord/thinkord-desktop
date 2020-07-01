@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { Player, BigPlayButton } from 'video-react';
+import '../../../node_modules/video-react/dist/video-react.css';
 import BlockTitle from "../BlockTitle/BlockTitle";
-import BlockDescription from "../BlockDescription";
+import BlockDescription from "../BlockDescription/BlockDescription";
+import Upload from "../Attachment/Attachment";
 
-import { speech2text } from '../../media-capturer/speech2text';
-
+import './block.scss'
 // Icons
-import BlockIcon from "../../asset/collection/microphone.svg";
+import BlockIcon from "../../asset/collection/youtube.svg";
 import TrashIcon from "../../asset/collection/trash-alt.svg";
 import AngleIcon from "../../asset/collection/angle-up.svg";
 import MarkIcon from "../../asset/collection/bookmark.svg";
 import MarkFullIcon from "../../asset/collection/bookmark-full.svg";
 
-export default function AudioBlock(props) {
+export default function VideoBlock(props) {
     const scaleid = "scale_" + props.block.timestamp;
     const checkid = "check_" + props.block.timestamp;
 
@@ -26,20 +28,11 @@ export default function AudioBlock(props) {
             document.getElementById(scaleid).classList.remove("rotate-close");
             document.getElementById(scaleid).classList.toggle("rotate-open");
         }
-        setScaling(!scaling);
-    }
-
-    const handleSpeech2Text = () => {
-        if (process.env.SPEECH_SERVICE_SUBSCRIPTION_KEY) {
-            let path = props.block.paths[0];
-            speech2text(path, props.block.timestamp, props.handleSpeechText);
-        } else {
-            alert('Please provide your Azure speech service key');
-        }
+        setScaling(!scaling)
     }
 
     return (
-        <div id={props.block.timestamp} className="audioBlock blockContent" >
+        <div id={props.block.timestamp} className="videoBlock blockContent" >
             <div className="borderLine"></div>
             <BlockTitle className="blockTitle" time={props.block.timestamp} onChangeTitle={props.handleTitle} title={props.block.title} />
 
@@ -56,22 +49,21 @@ export default function AudioBlock(props) {
             <button className="iconBtn scaleBtn" onClick={handleScaling}><img src={AngleIcon} id={scaleid}></img></button>
             {scaling &&
                 <div className="blockMain">
-                    <audio controls="controls">
+                    <Player>
+                        <BigPlayButton position="center" />
                         <source src={props.block.paths[0]} />
-                    </audio>
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Text in the audio</h5>
-                            <p className="card-text">{props.block.speechText}</p>
-                            <button onClick={handleSpeech2Text} type="button" className="btn btn-outline-success">Speech2text</button>
-                        </div>
-                    </div>
+                    </Player>
                     <BlockDescription
                         description={props.block.description}
                         addDescription={props.addDescription}
                         time={props.block.timestamp}
                         handleLinker={props.handleLinker}
                     />
+                    <Upload
+                        paths={props.block.paths}
+                        time={props.block.timestamp}
+                        addFile={props.addFile}
+                        delFile={props.delFile} />
                 </div>
             }
         </div>

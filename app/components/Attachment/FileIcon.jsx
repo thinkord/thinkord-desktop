@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // import icon
-import CommonIcon from"../asset/uploadfile/file-alt.svg"
-import ZipIcon from"../asset/uploadfile/file-archive.svg"
-import AudioIcon from"../asset/uploadfile/file-audio.svg"
-import ExcelIcon from"../asset/uploadfile/file-excel.svg"
-import PdfIcon from"../asset/uploadfile/file-pdf.svg"
-import VideoIcon from"../asset/uploadfile/file-video.svg"
-import WordIcon from"../asset/uploadfile/file-word.svg"
+import CommonIcon from"../../asset/uploadfile/file-alt.svg"
+import ZipIcon from"../../asset/uploadfile/file-archive.svg"
+import AudioIcon from"../../asset/uploadfile/file-audio.svg"
+import ExcelIcon from"../../asset/uploadfile/file-excel.svg"
+import PdfIcon from"../../asset/uploadfile/file-pdf.svg"
+import VideoIcon from"../../asset/uploadfile/file-video.svg"
+import WordIcon from"../../asset/uploadfile/file-word.svg"
 
 export default class FileIcon extends Component{
     constructor(props){

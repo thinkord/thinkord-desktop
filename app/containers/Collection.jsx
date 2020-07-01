@@ -4,7 +4,7 @@ import BlockContainer from "./BlockContainer";
 import Header from "../components/layout/Header";
 import Progressbar from "../components/layout/Progressbar";
 import Navigationbar from '../components/layout/Navigationbar';
-import ExportModal from '../components/ExportModal';
+import ExportModal from '../components/ExportModal/ExportModal';
 import './css/Collection.css';
 
 // ELectron module

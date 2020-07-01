@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import Upload from '../Attachment/Attachment';
 import BlockTitle from "../BlockTitle/BlockTitle";
-import BlockDescription from "../BlockDescription";
+import BlockDescription from "../BlockDescription/BlockDescription";
 
+import './block.scss'
 // Icons
-import BlockIcon from "../../asset/collection/images.svg";
+import BlockIcon from "../../asset/collection/quote-right.svg";
 import TrashIcon from "../../asset/collection/trash-alt.svg";
 import AngleIcon from "../../asset/collection/angle-up.svg";
 import MarkIcon from "../../asset/collection/bookmark.svg";
 import MarkFullIcon from "../../asset/collection/bookmark-full.svg";
 
-export default function ImageBlock(props) {
+
+export default function TextBlock(props) {
     const scaleid = "scale_" + props.block.timestamp;
     const checkid = "check_" + props.block.timestamp;
 
@@ -24,15 +27,11 @@ export default function ImageBlock(props) {
             document.getElementById(scaleid).classList.remove("rotate-close");
             document.getElementById(scaleid).classList.toggle("rotate-open");
         }
-        setScaling(!scaling)
-    }
-
-    let showImageWindow = () => {
-        window.open(props.block.paths[0]);
+        setScaling(!scaling);
     }
 
     return (
-        <div id={props.block.timestamp} className="picBlock blockContent">
+        <div id={props.block.timestamp} className="textBlock blockContent">
             <div className="borderLine"></div>
             <BlockTitle className="blockTitle" time={props.block.timestamp} onChangeTitle={props.handleTitle} title={props.block.title} />
             <button className="iconBtn removeBtn" onClick={props.delBlock.bind(this, props.block.timestamp)}><img src={TrashIcon}></img></button>
@@ -48,12 +47,17 @@ export default function ImageBlock(props) {
             <button className="iconBtn scaleBtn" onClick={handleScaling}><img src={AngleIcon} id={scaleid}></img></button>
             {scaling &&
                 <div className="blockMain">
-                    <img src={props.block.paths[0]} onDoubleClick={showImageWindow} />
                     <BlockDescription
                         description={props.block.description}
                         addDescription={props.addDescription}
                         time={props.block.timestamp}
                         handleLinker={props.handleLinker}
+                    />
+                    <Upload
+                        paths={props.block.paths}
+                        time={props.block.timestamp}
+                        addFile={props.addFile}
+                        delFile={props.delFile}
                     />
                 </div>
             }
