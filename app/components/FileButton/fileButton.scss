@@ -1,0 +1,67 @@
+.file_icon{
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.modal_header{
+  padding: 10px;
+  background-color: #143938;
+  color: #35C189;
+}
+
+.modal_footer{
+  border: none;
+}
+
+.modal_input{
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #BDD4CB;
+}
+
+.modal_icon{
+  font-size: 25px;
+  color: #143938;
+}
+
+.react-contextmenu {
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  color: #143938;
+  font-size: 16px;
+  margin: 2px 0 0;
+  min-width: 160px;
+  outline: none;
+  opacity: 0;
+  padding: 5px 0;
+  pointer-events: none;
+  text-align: left;
+  transition: opacity 250ms ease !important;
+}
+
+.react-contextmenu.react-contextmenu--visible {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 9999;
+}
+
+.react-contextmenu-item {
+  background: 0 0;
+  border: 0;
+  color: #143938;
+cursor: pointer;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 3px 20px;
+  text-align: inherit;
+  white-space: nowrap;
+}
+
+.react-contextmenu-item:hover{
+  background-color: #143938;
+  color: #fff;
+}

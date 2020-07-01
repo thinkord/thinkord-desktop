@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ContextMenuTrigger, ContextMenu, MenuItem } from "react-contextmenu";
-import FileIcon from '../asset/Thinkord-LOGO.png';
-
+import FileIcon from '../../asset/Thinkord-LOGO.png';
+import './fileButton.scss'
 const { ipcRenderer } = require('electron');
 
 export default class FileButton extends Component {

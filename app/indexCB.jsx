@@ -3,7 +3,7 @@ import "@babel/polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './indexCB.css'
-import ControlBar from './containers/ControlBar';
+import ControlBar from './containers/ControlBar/ControlBar';
 
 //控制列
 ReactDOM.render(<ControlBar />, document.getElementById('root'));
