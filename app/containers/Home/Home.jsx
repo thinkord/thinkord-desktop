@@ -1,11 +1,11 @@
 // React module
 import React, { Component } from 'react';
+import './home.scss';
 
 // Electron module
 const { ipcRenderer } = require('electron');
 
 // Third-party packages
-import '../css/Home.css';
 import { JSONManager } from '../../renderer/json-manager';
 import FileButton from '../../components/FileButton/FileButton';
 

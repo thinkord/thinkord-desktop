@@ -1,11 +1,11 @@
 // React modules
 import React, { Component } from 'react';
 import BlockContainer from "./BlockContainer";
-import Header from "../components/layout/Header";
-import Progressbar from "../components/layout/Progressbar";
-import Navigationbar from '../components/layout/Navigationbar';
-import ExportModal from '../components/ExportModal/ExportModal';
-import './css/Collection.css';
+import Header from "../../components/layout/Header";
+import Progressbar from "../../components/layout/Progressbar";
+import Navigationbar from '../../components/layout/Navigationbar';
+import ExportModal from '../../components/ExportModal/ExportModal';
+import './collection.scss';
 
 // ELectron module
 import { ipcRenderer } from "electron";

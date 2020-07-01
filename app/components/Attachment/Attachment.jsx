@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { shell } from 'electron';
 import FileIcon from './FileIcon';
-
+import './attachment.scss';
 // Icons
 import CommonIcon from "../../asset/uploadfile/file-alt.svg";
 import TrashIcon from "../../asset/uploadfile/upload-trash-alt.svg";
