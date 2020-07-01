@@ -5,11 +5,11 @@ import BlockDescription from "../BlockDescription/BlockDescription";
 
 import './block.scss'
 // Icons
-import BlockIcon from "../../asset/collection/quote-right.svg";
-import TrashIcon from "../../asset/collection/trash-alt.svg";
-import AngleIcon from "../../asset/collection/angle-up.svg";
-import MarkIcon from "../../asset/collection/bookmark.svg";
-import MarkFullIcon from "../../asset/collection/bookmark-full.svg";
+import BlockIcon from "./icons/quote-right.svg";
+import TrashIcon from "./icons/trash-alt.svg";
+import AngleIcon from "./icons/angle-up.svg";
+import MarkIcon from "./icons/bookmark.svg";
+import MarkFullIcon from "./icons/bookmark-full.svg";
 
 
 export default function TextBlock(props) {

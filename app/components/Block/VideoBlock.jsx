@@ -7,11 +7,11 @@ import Upload from "../Attachment/Attachment";
 
 import './block.scss'
 // Icons
-import BlockIcon from "../../asset/collection/youtube.svg";
-import TrashIcon from "../../asset/collection/trash-alt.svg";
-import AngleIcon from "../../asset/collection/angle-up.svg";
-import MarkIcon from "../../asset/collection/bookmark.svg";
-import MarkFullIcon from "../../asset/collection/bookmark-full.svg";
+import BlockIcon from "./icons/youtube.svg";
+import TrashIcon from "./icons/trash-alt.svg";
+import AngleIcon from "./icons/angle-up.svg";
+import MarkIcon from "./icons/bookmark.svg";
+import MarkFullIcon from "./icons/bookmark-full.svg";
 
 export default function VideoBlock(props) {
     const scaleid = "scale_" + props.block.timestamp;

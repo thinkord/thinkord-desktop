@@ -16,7 +16,7 @@ import 'noty/lib/themes/mint.css';
 import 'noty/lib/themes/relax.css';
 
 // Icons
-import UserLoginIcon from "../../asset/user.svg";
+import UserLoginIcon from "./icons/user.svg";
 
 export default class Home extends Component {
     constructor(props) {
