@@ -6,5 +6,5 @@ These guides are intended for people working on Thinkord project.
 - Issues
 - Documentation Styleguide
 - Source Code Directory Structure
-- Coding Style
+- [Coding Style](coding-style.md)
 - Testing
