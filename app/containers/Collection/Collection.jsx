@@ -1,10 +1,9 @@
 // React modules
 import React, { Component } from 'react';
-import BlockContainer from "./BlockContainer";
-import Header from "../../components/layout/Header";
-import Progressbar from "../../components/layout/Progressbar";
-import Navigationbar from '../../components/layout/Navigationbar';
-import ExportModal from '../../components/ExportModal/ExportModal';
+import Block from "../Block/Block";
+import Header from "../Header/Header";
+import NavigationBar from '../NavigationBar/NavigationBar';
+import ExportModal from '../ExportModal/ExportModal';
 import './collection.scss';
 
 // ELectron module
@@ -108,11 +107,11 @@ class Collection extends Component {
   render() {
     return (
       <BlockUi tag="div" blocking={!this.state.saveSign} >
-        <div className="App" id="App">
-          <div className="pageContent" id="content">
+        <div className="app" id="app">
+          <div className="page-content" id="content">
             <Header title={this.state.title} handleTitle={this.handleTitle} />
-            <div><Progressbar /></div>
-            <BlockContainer
+            {/* <div><Progressbar /></div> */}
+            <Block
               onNewBlock={this.scrollToBottom}
               ReturnToTop={this.scrollToTop}
               clickHome={this.returnToMain}
@@ -120,7 +119,7 @@ class Collection extends Component {
               title={this.state.title}
             />
             {!this.state.modalShow &&
-              <Navigationbar
+              <NavigationBar
                 clickPreviousStep={this.handleClickPreviousStep}
                 clickNextStep={this.handleClickNextStep}
                 clickSave={this.saveChange}
