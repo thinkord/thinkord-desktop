@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Upload from '../Upload';
-import BlockTitle from "../BlockTitle/BlockTitle";
-import BlockDescription from "../BlockDescription";
+import Attachment from './Attachment/Attachment';
+import BlockTitle from './BlockTitle';
+import BlockDescription from "./BlockDescription"
 
 // Icons
 import BlockIcon from "../../asset/collection/quote-right.svg";
@@ -52,7 +52,7 @@ export default function TextBlock(props) {
                         time={props.block.timestamp}
                         handleLinker={props.handleLinker}
                     />
-                    <Upload
+                    <Attachment
                         paths={props.block.paths}
                         time={props.block.timestamp}
                         addFile={props.addFile}
