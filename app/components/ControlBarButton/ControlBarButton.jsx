@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './controlBarButton.scss'
 
 export default class ControlBarButton extends Component {
     //decide which method that the button should have

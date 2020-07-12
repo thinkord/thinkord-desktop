@@ -5,7 +5,7 @@ body {
     -webkit-app-region: drag;
 }
 
-input{
+input {
     border-radius: 5px;
     padding-left: 10px;
     border-color: white;
@@ -26,7 +26,7 @@ textarea {
     outline: none;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     display: none;
 }
 
@@ -37,27 +37,4 @@ textarea {
 .textbtndiv {
     position: absolute;
     right: 20px;
-}
-
-.btn {
-    background-color: rgb(68, 68, 68);
-    -webkit-app-region: no-drag;
-    padding-right: 1px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-.btn:focus{
-    outline: none !important;
-    box-shadow: none;
-}
-
-.icon {
-    background-color: rgb(68, 68, 68);
-    width: 20px;
-    height: 20px;
-}
-
-.bar_container {
-    padding-top: 5px;
-    padding-bottom: 5px;
 }

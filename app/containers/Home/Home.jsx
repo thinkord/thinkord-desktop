@@ -1,13 +1,13 @@
 // React module
 import React, { Component } from 'react';
+import './home.scss';
 
 // Electron module
 const { ipcRenderer } = require('electron');
 
 // Third-party packages
-import './css/Home.css';
-import { JSONManager } from '../renderer/json-manager';
-import FileButton from '../components/FileButton';
+import { JSONManager } from '../../renderer/json-manager';
+import FileButton from '../../components/FileButton/FileButton';
 
 // Notification
 import Noty from 'noty';
@@ -16,7 +16,7 @@ import 'noty/lib/themes/mint.css';
 import 'noty/lib/themes/relax.css';
 
 // Icons
-import UserLoginIcon from "../asset/user.svg";
+import UserLoginIcon from "./icons/user.svg";
 
 export default class Home extends Component {
     constructor(props) {

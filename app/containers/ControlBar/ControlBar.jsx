@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
-import ControlBarButton from '../components/ControlBarButton';
-import './css/ControlBar.css';
+import ControlBarButton from '../../components/ControlBarButton/ControlBarButton';
+import './controlBar.scss';
 
 const { ipcRenderer } = require('electron');
 
 // Import icon from assets folder
-import StartButton from '../asset/play-button.png';
-import StopButton from '../asset/stop.png';
-import AudioButton from '../asset/microphone.png';
-import AudioStartButton from '../asset/muted.png';
-import VideoButton from '../asset/video.png';
-import VideoStartButton from '../asset/no-video.png';
-import TextButton from '../asset/chat.png';
-import ScreenShotButton from '../asset/screenshot.png';
-import Substract from '../asset/substract.png';
-import HomeButton from '../asset/home.png';
-import QuitButton from '../asset/error.png';
+import StartButton from './icons/play-button.png';
+import StopButton from './icons/stop.png';
+import AudioButton from './icons/microphone.png';
+import AudioStartButton from './icons/muted.png';
+import VideoButton from './icons/video.png';
+import VideoStartButton from './icons/no-video.png';
+import TextButton from './icons/chat.png';
+import ScreenShotButton from './icons/screenshot.png';
+import Substract from './icons/substract.png';
+import HomeButton from './icons/home.png';
+import QuitButton from './icons/error.png';
 
 export default class ControlBar extends Component {
     constructor(props) {
@@ -165,7 +165,7 @@ export default class ControlBar extends Component {
 
     render() {
         return (
-            <div className="bar_container">
+            <div className="bar-container">
                 {this.state.controlbar_button.map(button =>
                     <ControlBarButton
                         key={button.id}

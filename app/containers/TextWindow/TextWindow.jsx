@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import ControlBarButton from '../components/ControlBarButton'
-import './css/ControlBar.css';
+// import ControlBarButton from '../components/ControlBarButton';
+import ControlBarButton from '../../components/ControlBarButton/ControlBarButton';
+// import '../css/ControlBar.css';
+import './textWindow.scss';
 
-import OKButton from '../asset/check.png';
-import CancelButton from '../asset/remove.png';
-import MarkButton from '../asset/star.png';
-import MarkFillButton from '../asset/star-fill.png';
+import OKButton from '../../asset/check.png';
+import CancelButton from '../../asset/remove.png';
+import MarkButton from '../../asset/star.png';
+import MarkFillButton from '../../asset/star-fill.png';
 
 const { ipcRenderer } = require('electron');
 
