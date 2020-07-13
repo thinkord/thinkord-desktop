@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './fileIcon.scss';
 // import icon
+
 import './fileIcon.scss';
 import CommonIcon from"./icons/file-alt.svg"
 import ZipIcon from"./icons/file-archive.svg"
@@ -8,6 +10,7 @@ import ExcelIcon from"./icons/file-excel.svg"
 import PdfIcon from"./icons/file-pdf.svg"
 import VideoIcon from"./icons/file-video.svg"
 import WordIcon from"./icons/file-word.svg"
+
 
 export default class FileIcon extends Component{
     constructor(props){
