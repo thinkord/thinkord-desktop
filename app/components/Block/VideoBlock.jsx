@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Player, BigPlayButton } from 'video-react';
-import '../../node_modules/video-react/dist/video-react.css';
-import BlockTitle from "./BlockTitle";
-import BlockDescription from "./BlockDescription";
-import Attachment from "./Attachment/Attachment";
+
+import '../../../node_modules/video-react/dist/video-react.css';
+import BlockTitle from "../BlockTitle/BlockTitle";
+import BlockDescription from "../BlockDescription/BlockDescription";
+import Attachment from "../Attachment/Attachment";
+
 
 import './block.scss'
 // Icons

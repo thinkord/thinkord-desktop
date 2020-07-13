@@ -1,9 +1,10 @@
 // React modules
 import React, { Component } from 'react';
-import Block from "../Block/Block";
-import Header from "../Header/Header";
-import NavigationBar from '../NavigationBar/NavigationBar';
-import ExportModal from '../ExportModal/ExportModal';
+
+import Block from "./Block/Block";
+import Header from "./Header/Header";
+import NavigationBar from './NavigationBar/NavigationBar';
+import ExportModal from './ExportModal/ExportModal';
 import './collection.scss';
 
 // ELectron module

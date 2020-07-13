@@ -8,7 +8,7 @@ import TextBlock from "../../components/Block/TextBlock";
 import AudioBlock from "../../components/Block/AudioBlock";
 
 // Electron module
-import { ipcRenderer } from "electron";
+import { ipcRenderer } from "./Block/node_modules/electron";
 
 // Third party module
 import { AudioRecorder } from '../../media-capturer/audio-recorder';
@@ -20,14 +20,14 @@ import { NoteManager } from "../../renderer/note-manager";
 import { getScreenshot } from '../../media-capturer/screenshot';
 
 // Notification
-import Noty from 'noty';
-import 'noty/lib/noty.css';
-import 'noty/lib/themes/mint.css';
-import 'noty/lib/themes/relax.css';
+import Noty from './Block/node_modules/noty';
+import './Block/node_modules/noty/lib/noty.css';
+import './Block/node_modules/noty/lib/themes/mint.css';
+import './Block/node_modules/noty/lib/themes/relax.css';
 
 // Parse text to link
-import Autolinker from 'autolinker';
-import parse from 'html-react-parser';
+import Autolinker from './Block/node_modules/autolinker';
+import parse from './Block/node_modules/html-react-parser';
 
 const jsonManager = new JSONManager();
 let pre_step = [];
