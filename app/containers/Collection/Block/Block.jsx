@@ -1,33 +1,32 @@
 // React module
 import React, { Component } from 'react';
 
-// import ImageBlock from '../components/ImageBlock';
-import ImageBlock from '../../components/Block/ImageBlock';
-import VideoBlock from "../../components/Block/VideoBlock";
-import TextBlock from "../../components/Block/TextBlock";
-import AudioBlock from "../../components/Block/AudioBlock";
+import ImageBlock from '../../../components/Block/ImageBlock';
+import VideoBlock from "../../../components/Block/VideoBlock";
+import TextBlock from "../../../components/Block/TextBlock";
+import AudioBlock from "../../../components/Block/AudioBlock";
 
 // Electron module
-import { ipcRenderer } from "./Block/node_modules/electron";
+import { ipcRenderer } from "electron";
 
 // Third party module
-import { AudioRecorder } from '../../media-capturer/audio-recorder';
-import { videoRecordStart, videoRecordStop } from '../../media-capturer/video-recorder';
-import { JSONManager } from "../../renderer/json-manager";
-import { NoteManager } from "../../renderer/note-manager";
+import { AudioRecorder } from '../../../media-capturer/audio-recorder';
+import { videoRecordStart, videoRecordStop } from '../../../media-capturer/video-recorder';
+import { JSONManager } from "../../../renderer/json-manager";
+import { NoteManager } from "../../../renderer/note-manager";
 
 // Import media API modules
-import { getScreenshot } from '../../media-capturer/screenshot';
+import { getScreenshot } from '../../../media-capturer/screenshot';
 
 // Notification
-import Noty from './Block/node_modules/noty';
-import './Block/node_modules/noty/lib/noty.css';
-import './Block/node_modules/noty/lib/themes/mint.css';
-import './Block/node_modules/noty/lib/themes/relax.css';
+import Noty from 'noty';
+import 'noty/lib/noty.css';
+import 'noty/lib/themes/mint.css';
+import 'noty/lib/themes/relax.css';
 
 // Parse text to link
-import Autolinker from './Block/node_modules/autolinker';
-import parse from './Block/node_modules/html-react-parser';
+import Autolinker from 'autolinker';
+import parse from 'html-react-parser';
 
 const jsonManager = new JSONManager();
 let pre_step = [];
@@ -541,7 +540,7 @@ export class BlockContainer extends Component {
         // console.log(this.state.collection.blocks)
 
         return (
-            <div className="allBlocks">
+            <div className="all-blocks">
                 {this.state.collection.blocks.map((block, id) => (
                     <div key={id}>
                         {this.distBlock(block)}
