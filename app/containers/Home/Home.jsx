@@ -1,5 +1,6 @@
 // React module
 import React, { Component } from 'react';
+import WindowTitlebar from '../../components/WindowTitlebar/WindowTitlebar';
 import './home.scss';
 
 // Electron module
@@ -223,6 +224,7 @@ export default class Home extends Component {
     render() {
         return (
             <div>
+                <WindowTitlebar docTitle="Home"/>
                 <span className="menu_toggle" onClick={this.handleMenuOpen}>
                     <i className="menu_open fas fa-bars fa-lg"></i>
                     <i className="menu_close fas fa-times fa-lg"></i>
