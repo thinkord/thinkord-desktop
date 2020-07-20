@@ -1,14 +1,12 @@
 import { IpcRenderer } from 'electron';
 import { IpcRequest } from "../shared/IpcRequest";
-import { object } from 'prop-types';
 
 export class IpcClient {
     private ipcRenderer?: IpcRenderer;
-
+ 
     // , request: IpcRequest
     public send<T>(channel: string, request: IpcRequest): Promise<T> {
         // If the ipcRenderer is not available try to initialize it
-        console.log(request)
         if (!this.ipcRenderer) {
             this.initializeIpcRenderer();
         }

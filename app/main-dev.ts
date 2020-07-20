@@ -17,7 +17,7 @@ const { initUserEnv } = require('./utils/init-user-env');
 require('dotenv').config();
 
 class Main {
-    wins: Object = {
+    wins: object = {
         homeWin: null,
         controlbarWin: null,
         textWin: null
@@ -64,6 +64,7 @@ class Main {
 // The whole channels we register when initializing
 (new Main()).init([
     new ShortcutChannel('shortcut'),
+    new FunctionBtnChannel('functionbtn'),
     new FunctionBtnChannel('click-text-btn'),
     new FunctionBtnChannel('click-dragsnip-btn'),
     new FunctionBtnChannel('click-audio-btn'),

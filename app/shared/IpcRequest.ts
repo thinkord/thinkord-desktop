@@ -1,10 +1,13 @@
+import { string } from "prop-types";
+
+export type params={
+    action?: string
+}
 export interface IpcRequest {
     type?: string;
     responseChannel?: string; 
-
-    params?: string[];
+    params?: params
 }
-
 
 // export class IpcRequest implements IIpcRequest {
 //     type: string;

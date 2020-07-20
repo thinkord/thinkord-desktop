@@ -14,7 +14,7 @@ export class ShortcutChannel implements IpcChannelInterface {
         return this.channelName;
     }
 
-    dispatch(event: IpcMainEvent, wins: Object, request: IpcRequest): void {
+    dispatch(event: IpcMainEvent, wins: object, request: IpcRequest): void {
         switch (request.type) {
             case 'POST':
                 registerShortcut(wins);

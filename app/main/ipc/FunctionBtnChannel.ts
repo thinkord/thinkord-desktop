@@ -1,6 +1,7 @@
 import { IpcChannelInterface } from "./IpcChannelInterface";
 import { IpcMainEvent } from "electron";
-// import { IpcRequest } from "../../shared/IpcRequest";
+import { IpcRequest } from "../../shared/IpcRequest";
+import { operateFuncButton } from "../controllers/operation";
 
 export class FunctionBtnChannel implements IpcChannelInterface {
     channelName: string
@@ -12,19 +13,10 @@ export class FunctionBtnChannel implements IpcChannelInterface {
         return this.channelName;
     }
 
-    dispatch(event: IpcMainEvent, Wins: Object, args: any): void {
-        switch (this.getName()) {
-            case 'click-text-btn':
-                Wins["homeWin"].webContents.send('open-text-win');
-                break;
-            case 'click-dragsnip-btn':
-                Wins["homeWin"].webContents.send('drag-snip');
-                break;
-            case 'click-audio-btn':
-                Wins["homeWin"].webContents.send('record-audio');
-                break;
-            case 'click-video-btn':
-                Wins["homeWin"].webContents.send('record-video');
+    dispatch(event: IpcMainEvent, wins: object, request: IpcRequest): void {
+        switch (request.type) {
+            case 'POST':
+                operateFuncButton(wins, request.params)
                 break;
         }
     }

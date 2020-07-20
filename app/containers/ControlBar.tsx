@@ -121,16 +121,16 @@ export default class ControlBar extends Component<{}, ControlBarState> {
     }
 
     /**
-     * Send message to ipcMain with channel 'click-text-btn'
+     * Send message to ipcMain with channel 'functionbtn'
      * @method
      */
-    handleText = () => ipcRenderer.send('click-text-btn');
+    handleText = () => ipcClient.send('functionbtn', { type: 'POST', params: { action: 'open-text-win' } });
 
     /**
-     * Send message to ipcMain with channel 'click-dragsnip-btn'
+     * Send message to ipcMain with channel 'functionbtn'
      * @method
      */
-    handleDragsnip = () => ipcRenderer.send('click-dragsnip-btn');
+    handleDragsnip = () => ipcClient.send('functionbtn', { type: 'POST', params: { action: 'drag-snip' } });
 
     /**
      * Send message to ipcMain with channel 'click-audio-btn'
@@ -147,7 +147,8 @@ export default class ControlBar extends Component<{}, ControlBarState> {
         });
         this.setState({ controlbar_button: buttons });
 
-        ipcRenderer.send('click-audio-btn');
+
+        ipcClient.send('functionbtn', { type: 'POST', params: { action: 'record-audio' } });
     }
 
     /**
@@ -164,7 +165,8 @@ export default class ControlBar extends Component<{}, ControlBarState> {
             return buttons;
         });
         this.setState({ controlbar_button: buttons });
-        ipcRenderer.send('click-video-btn');
+        
+        ipcClient.send('functionbtn', { type: 'POST', params: { action: 'record-video' } });
     }
 
     /** 
