@@ -57,25 +57,25 @@ export class WindowTitlebar extends Component {
                         <span>{this.props.docTitle}</span>
                     </div>
                     <div id="window-controls">
-                        <div class="button" id="min-button">
+                        <div className="button" id="min-button">
                             <svg version="1.1" aria-hidden="true" width="10" height="10">
                                 <path d="M 0,5 10,5 10,6 0,6 Z" />
                             </svg>
                         </div>
 
-                        <div class="button" id="max-button">    
+                        <div className="button" id="max-button">    
                             <svg version="1.1" aria-hidden="true" width="10" height="10">
                                 <path d="M 0,0 0,10 10,10 10,0 Z M 1,1 9,1 9,9 1,9 Z" />
                             </svg>
                         </div>
 
-                        <div class="button" id="restore-button">
+                        <div className="button" id="restore-button">
                             <svg version="1.1" aria-hidden="true" width='11' height='11' viewBox='0 0 11 11' xmlns='http://www.w3.org/2000/svg'>
                                 <path d='M11 8.798H8.798V11H0V2.202h2.202V0H11v8.798zm-3.298-5.5h-6.6v6.6h6.6v-6.6zM9.9 1.1H3.298v1.101h5.5v5.5h1.1v-6.6z'/>
                             </svg>
                         </div>
 
-                        <div class="button" id="close-button">    
+                        <div className="button" id="close-button">    
                             <svg aria-hidden="true" version="1.1" width="10" height="10">
                                 <path d="M 0,0 0,0.7 4.3,5 0,9.3 0,10 0.7,10 5,5.7 9.3,10 10,10 10,9.3 5.7,5 10,0.7 10,0 9.3,0 5,4.3 0.7,0 Z" />
                             </svg>
