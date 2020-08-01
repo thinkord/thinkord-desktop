@@ -210,7 +210,6 @@ export default class Home extends Component {
             }
         }
         this.setState({ collections: new_collections });
-        document.getElementById("main_search").value = "Search...";
     }
 
     // View all the file in local file system
@@ -251,47 +250,47 @@ export default class Home extends Component {
                             <h2>Folder</h2>
                             <div className="folder-wrapper">
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                                 <div className="folder-block">
-                                    <i class="fas fa-folder"></i>
+                                    <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
                             </div>
@@ -301,85 +300,85 @@ export default class Home extends Component {
                             <div className="file-wrapper">
                                 <div className="note-block">
                                     <div className="note-block-control">
-                                        <div className="bookmark"><i class="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i class="fas fa-ellipsis-h"></i></div>
+                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
+                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
                                     </div>
                                     <div className="note-block-details">
                                         <h5 className="note-block-title">My Note</h5>
                                         <div className="note-block-time">
-                                            <i class="fas fa-clock"></i>
+                                            <i className="fas fa-clock"></i>
                                             <span>changed 2 hours ago</span>
                                         </div>
                                         <div className="note-block-tags">
-                                            <i class="fas fa-tag"></i>
+                                            <i className="fas fa-tag"></i>
                                             <span>statistics</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="note-block">
                                     <div className="note-block-control">
-                                        <div className="bookmark"><i class="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i class="fas fa-ellipsis-h"></i></div>
+                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
+                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
                                     </div>
                                     <div className="note-block-details">
                                         <h5 className="note-block-title">My Note</h5>
                                         <div className="note-block-time">
-                                            <i class="fas fa-clock"></i>
+                                            <i className="fas fa-clock"></i>
                                             <span>changed 2 hours ago</span>
                                         </div>
                                         <div className="note-block-tags">
-                                            <i class="fas fa-tag"></i>
+                                            <i className="fas fa-tag"></i>
                                             <span>statistics</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="note-block">
                                     <div className="note-block-control">
-                                        <div className="bookmark"><i class="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i class="fas fa-ellipsis-h"></i></div>
+                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
+                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
                                     </div>
                                     <div className="note-block-details">
                                         <h5 className="note-block-title">My Note</h5>
                                         <div className="note-block-time">
-                                            <i class="fas fa-clock"></i>
+                                            <i className="fas fa-clock"></i>
                                             <span>changed 2 hours ago</span>
                                         </div>
                                         <div className="note-block-tags">
-                                            <i class="fas fa-tag"></i>
+                                            <i className="fas fa-tag"></i>
                                             <span>statistics</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="note-block">
                                     <div className="note-block-control">
-                                        <div className="bookmark"><i class="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i class="fas fa-ellipsis-h"></i></div>
+                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
+                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
                                     </div>
                                     <div className="note-block-details">
                                         <h5 className="note-block-title">My Note</h5>
                                         <div className="note-block-time">
-                                            <i class="fas fa-clock"></i>
+                                            <i className="fas fa-clock"></i>
                                             <span>changed 2 hours ago</span>
                                         </div>
                                         <div className="note-block-tags">
-                                            <i class="fas fa-tag"></i>
+                                            <i className="fas fa-tag"></i>
                                             <span>statistics</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="note-block">
                                     <div className="note-block-control">
-                                        <div className="bookmark"><i class="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i class="fas fa-ellipsis-h"></i></div>
+                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
+                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
                                     </div>
                                     <div className="note-block-details">
                                         <h5 className="note-block-title">My Note</h5>
                                         <div className="note-block-time">
-                                            <i class="fas fa-clock"></i>
+                                            <i className="fas fa-clock"></i>
                                             <span>changed 2 hours ago</span>
                                         </div>
                                         <div className="note-block-tags">
-                                            <i class="fas fa-tag"></i>
+                                            <i className="fas fa-tag"></i>
                                             <span>statistics</span>
                                         </div>
                                     </div>
