@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import Block from "./Block/Block";
 import Header from "./Header/Header";
+import WindowTitlebar from '../../components/WindowTitlebar/WindowTitlebar';
 import NavigationBar from './NavigationBar/NavigationBar';
 import ExportModal from './ExportModal/ExportModal';
 import './collection.scss';
@@ -108,6 +109,7 @@ class Collection extends Component {
   render() {
     return (
       <BlockUi tag="div" blocking={!this.state.saveSign} >
+      <WindowTitlebar docTitle={this.state.title}/>
         <div className="app" id="app">
           <div className="page-content" id="content">
             <Header title={this.state.title} handleTitle={this.handleTitle} />

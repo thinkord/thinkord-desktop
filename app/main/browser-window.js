@@ -97,6 +97,7 @@ exports.createHomeWindow = (homeWin) => {
         width: 800,
         height: 600,
         resizable: true,
+        frame: false,
         show: false,
         webPreferences: {
             nodeIntegration: true,
