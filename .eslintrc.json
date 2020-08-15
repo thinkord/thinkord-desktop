@@ -1,0 +1,43 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "no-unused-vars": "error",
+        "semi": ["error", "always", {
+            "omitLastInOneLineBlock": true
+        }],
+        "no-console": "off",        
+        "eol-last": ["error", "always"],
+        "space-before-blocks": "error",
+        "no-duplicate-imports": ["error", {
+            "includeExports": true
+        }],        
+        "@typescript-eslint/naming-convention": ["error",
+            {
+                "selector": "interface",
+                "format": ["PascalCase"],
+                "custom": {
+                    "regex": "^I[A-Z]",
+                    "match": false
+                }
+            }
+        ]
+    }
+}

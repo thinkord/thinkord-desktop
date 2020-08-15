@@ -1,0 +1,6 @@
+node_modules
+build
+docs
+configs
+app/config
+app/migrations
