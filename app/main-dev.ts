@@ -301,7 +301,7 @@ class Main {
         });
 
         // Keep listening on channel 'delete-collection'.
-        ipcMain.on('delete-file', async (event, args) => {
+        ipcMain.on('delete-collection', async (event, args) => {
             // Delete collection from app.json.
             fs.readFile(appSettingPath, (err, data) => {
                 if (err) throw err;

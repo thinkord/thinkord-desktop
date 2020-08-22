@@ -1,89 +1,90 @@
 .side-note{
-  font-weight: normal;
-  font-size: 12px;
+    font-weight: normal;
+    font-size: 12px;
 }
 
 .search-button{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .search-bar {
-  width: 0px;
-  font-size: 25px;
-  font-weight: 700;
-  color: #666;
-  background-color: transparent;
-  transition: 0.5s;
-  /* height: 35px; */
-  border: 0px;
-  border-bottom: solid 3px #666;
-  /* border-radius: 5px; */
-  /* padding-left: 5px; */
-  /* color: #BDD4CB; */
-  outline: none;
+    width: 0px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #666;
+    background-color: transparent;
+    transition: 0.5s;
+    border: 0px;
+    border-bottom: solid 3px #666;
+    outline: none;
 }
 
 .search-bar.show{
-  width: 400px;
+    width: 400px;
 }
 
 .search-button i{
-  font-size: 40px;
-  margin: 15px;
-  cursor: pointer;
+    font-size: 40px;
+    margin: 15px;
+    cursor: pointer;
 }
 
 #search-result-menu{
-  position: absolute;
-  right: 0;
-  top: 100%;
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  padding: 15px 0;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.2s;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    padding: 15px 0;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s;
 }
 
 #search-result-menu.show{
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .search-count{
-  margin-bottom: 10px;
-  font-weight: normal;
-  color: #35C189;
-  padding: 0 30px;
+    margin-bottom: 0;
+    font-weight: normal;
+    color: #35C189;
+    padding: 0 30px;
 }
 
 .result-block{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 30px;
-  cursor: pointer;
-  transition: 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: 0.1s;
 }
 
 .result-block:hover{
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .note-info-wrapper{
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
-
+.note-info-wrapper .note-title{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
 .note-info-wrapper i{
-  margin: 0;
-  margin-right: 20px;
-  color: #35C189;
-  font-size: 35px;
+    margin: 0;
+    margin-right: 20px;
+    color: #35C189;
+    font-size: 35px;
 }
