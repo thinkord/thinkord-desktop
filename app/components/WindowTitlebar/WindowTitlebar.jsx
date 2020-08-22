@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { remote } from 'electron'
+import logo from '../../asset/Thinkord-LOGO.png'
 import "./windowTitlebar.scss"
 
 const win = remote.getCurrentWindow()
@@ -50,7 +51,7 @@ export class WindowTitlebar extends Component {
             <div id="titlebar" className="window-titlebar">
                 <div id="drag-region">
                     <div id="window-title">
-                        <img id="titlebar-logo" src="../../asset/Thinkord-LOGO.png" alt=""/>
+                        <img id="titlebar-logo" src={logo} alt=""/>
                         <span>Thinkord</span>
                     </div>
                     <div id="document-title">

@@ -8,7 +8,7 @@ const { ipcRenderer } = require('electron');
 
 // Third-party packages
 import { JSONManager } from '../../renderer/json-manager';
-import FileButton from '../../components/FileButton/FileButton';
+import NoteCard from '../../components/NoteCard/NoteCard';
 import SearchButton from '../../components/SearchButton/SearchButton'
 
 // Notification
@@ -28,8 +28,7 @@ export default class Home extends Component {
             collections: [],
             home_page: false,
             help_page: true,
-            about_us_page: true,
-            expand: false
+            about_us_page: true
         }
     }
 
@@ -57,7 +56,6 @@ export default class Home extends Component {
                 this.setState({ collections: nextCollections });
                 noti_rename = this.handleNoti(noti_rename, args.msg);
             } else {
-                document.getElementById("label_" + args.collectionIdx).innerText = args.oldCollectionName;
                 noti_rename = new Noty({
                     type: 'error',
                     theme: 'relax',
@@ -69,7 +67,7 @@ export default class Home extends Component {
 
         ipcRenderer.on('delete-collection', (event, args) => {
             if (!args.err) {
-                this.state.collection.map((collection) => {
+                this.state.collections.map((collection) => {
                     if (collection.path === args.collectionPath) {
                         let nextCollections = this.state.collections;
                         nextCollections.splice(args.collectionIdx, 1);  // Delete collection from array collections
@@ -144,7 +142,7 @@ export default class Home extends Component {
             }
         );
         document.getElementsByClassName("fa-chevron-circle-down")[0].className = "open_recent_icon fa fa-chevron-circle-down open_rotate";
-        this.setState({ expand: true });
+        // this.setState({ expand: true });
     }
 
     OpenRecentRemove = () => {
@@ -157,9 +155,9 @@ export default class Home extends Component {
             }
         );
         document.getElementsByClassName("fa-chevron-circle-down")[0].className = "open_recent_icon fa fa-chevron-circle-down close_rotate";
-        this.setState({
-            expand: false
-        });
+        // this.setState({
+        //     expand: false
+        // });
     }
 
     //change the content of main page
@@ -209,7 +207,7 @@ export default class Home extends Component {
                 new_collections.push(this.state.collections[i]);
             }
         }
-        this.setState({ collections: new_collections });
+        // this.setState({ collections: new_collections });
     }
 
     // View all the file in local file system
@@ -228,21 +226,12 @@ export default class Home extends Component {
                 <header className="home_header">
                     <h1 className="title">Home</h1>
                     <div className="controls">
-                        <SearchButton onSearchChange={this.handleSearchClick} />
-                        <i className="fas fa-plus-circle fa-lg"></i>
+                        <SearchButton collections={this.state.collections} onSearchChange={this.handleSearchClick} />
+                        <i className="fas fa-plus-circle fa-lg" onClick={this.handleAddClick}></i>
                         <img className="user" 
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ3f_mCLpkLWSbUPVBMkI1-ZUUFP-dqFeFGUCDOc1lzuWUQxROe&usqp=CAU"/>
                     </div>
                 </header>
-                {/* <span className="menu_toggle" onClick={this.handleMenuOpen}>
-                    <i className="menu_open fas fa-bars fa-lg"></i>
-                    <i className="menu_close fas fa-times fa-lg"></i>
-                </span>
-                <ul className="menu_items">
-                    <li><a href="#"><i className="icon fas fa-home" onClick={this.handleHomeClick}></i> Home</a></li>
-                    <li><a href="#"><i className="icon fas fa-question" onClick={this.handleHelpClick}></i> Help</a></li>
-                    <li><a href="#"><i className="icon fas fa-users" onClick={this.handleAboutUsClick}></i> About us</a></li>
-                </ul> */}
                 <main className="content" onClick={this.handleMenuClose}>
 
                     <div className="content_inner container" hidden={this.state.home_page}>
@@ -269,120 +258,22 @@ export default class Home extends Component {
                                     <i className="fas fa-folder"></i>
                                     <h5>My Folder1</h5>
                                 </div>
-                                <div className="folder-block">
-                                    <i className="fas fa-folder"></i>
-                                    <h5>My Folder1</h5>
-                                </div>
-                                <div className="folder-block">
-                                    <i className="fas fa-folder"></i>
-                                    <h5>My Folder1My Folder1</h5>
-                                </div>
-                                <div className="folder-block">
-                                    <i className="fas fa-folder"></i>
-                                    <h5>My Folder1</h5>
-                                </div>
-                                <div className="folder-block">
-                                    <i className="fas fa-folder"></i>
-                                    <h5>My Folder1</h5>
-                                </div>
-                                <div className="folder-block">
-                                    <i className="fas fa-folder"></i>
-                                    <h5>My Folder1</h5>
-                                </div>
-                                <div className="folder-block">
-                                    <i className="fas fa-folder"></i>
-                                    <h5>My Folder1</h5>
-                                </div>
                             </div>
                         </div>
                         <div id="file-section">
                             <h2>File</h2>
                             <div className="file-wrapper">
-                                <div className="note-block">
-                                    <div className="note-block-control">
-                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
-                                    </div>
-                                    <div className="note-block-details">
-                                        <h5 className="note-block-title">My Note</h5>
-                                        <div className="note-block-time">
-                                            <i className="fas fa-clock"></i>
-                                            <span>changed 2 hours ago</span>
-                                        </div>
-                                        <div className="note-block-tags">
-                                            <i className="fas fa-tag"></i>
-                                            <span>statistics</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="note-block">
-                                    <div className="note-block-control">
-                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
-                                    </div>
-                                    <div className="note-block-details">
-                                        <h5 className="note-block-title">My Note</h5>
-                                        <div className="note-block-time">
-                                            <i className="fas fa-clock"></i>
-                                            <span>changed 2 hours ago</span>
-                                        </div>
-                                        <div className="note-block-tags">
-                                            <i className="fas fa-tag"></i>
-                                            <span>statistics</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="note-block">
-                                    <div className="note-block-control">
-                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
-                                    </div>
-                                    <div className="note-block-details">
-                                        <h5 className="note-block-title">My Note</h5>
-                                        <div className="note-block-time">
-                                            <i className="fas fa-clock"></i>
-                                            <span>changed 2 hours ago</span>
-                                        </div>
-                                        <div className="note-block-tags">
-                                            <i className="fas fa-tag"></i>
-                                            <span>statistics</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="note-block">
-                                    <div className="note-block-control">
-                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
-                                    </div>
-                                    <div className="note-block-details">
-                                        <h5 className="note-block-title">My Note</h5>
-                                        <div className="note-block-time">
-                                            <i className="fas fa-clock"></i>
-                                            <span>changed 2 hours ago</span>
-                                        </div>
-                                        <div className="note-block-tags">
-                                            <i className="fas fa-tag"></i>
-                                            <span>statistics</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="note-block">
-                                    <div className="note-block-control">
-                                        <div className="bookmark"><i className="far fa-bookmark"></i></div>
-                                        <div id="note-block-more"><i className="fas fa-ellipsis-h"></i></div>
-                                    </div>
-                                    <div className="note-block-details">
-                                        <h5 className="note-block-title">My Note</h5>
-                                        <div className="note-block-time">
-                                            <i className="fas fa-clock"></i>
-                                            <span>changed 2 hours ago</span>
-                                        </div>
-                                        <div className="note-block-tags">
-                                            <i className="fas fa-tag"></i>
-                                            <span>statistics</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                {
+                                    this.state.collections.map(note => {
+                                        return (
+                                            <NoteCard
+                                                key={note.id}
+                                                index={this.state.collections.indexOf(note)}
+                                                file={note}
+                                            ></NoteCard>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                         {/* <h1>Thinkord</h1><br />

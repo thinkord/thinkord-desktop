@@ -1,0 +1,151 @@
+.note-block{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    border: none;
+    width: 250px;
+    height: 170px;
+    border-radius: 25px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    padding: 10px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: 0s;
+}
+
+.note-block:focus{
+    outline: none;
+}
+
+.note-block:hover{
+    transform: scale(1.01);
+    transition: 0.2s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card-anchor{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.note-block-control{
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 20px;
+}
+
+#note-block-more, .bookmark{
+    position: relative;
+    z-index: 2;
+}
+
+#note-block-more, #note-block-more:focus{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.note-block-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    padding-top: 10px;
+}
+.note-block-details h5{
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.note-block i{
+    z-index: 2;
+    margin-right: 5px;
+    color: #35C189;
+}
+
+.note-block-title{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+
+.note-block-tags{
+    color: #35C189;
+}
+
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;  
+    transition-duration: 0.3s;
+}
+
+.note-card-menu{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 10px 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.note-card-menu.show{
+    visibility: visible;
+    opacity: 1;
+}
+
+.note-card-menu .menu-item{
+    text-align: left;
+    padding: 0 10px;
+    color: #333;
+    font-size: 16px;
+}
+.note-card-menu .menu-item i{
+    color: #333;
+}
+.note-card-menu .menu-item:hover{
+    background-color: #eee;
+}
+
+.modal_header{
+    padding: 10px;
+    background-color: #143938;
+    color: #35C189;
+}
+
+.modal_footer{
+    border: none;
+}
+
+.modal_input{
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #BDD4CB;
+}
+
+.modal_icon{
+    font-size: 25px;
+    color: #143938;
+}
